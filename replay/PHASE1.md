@@ -1,11 +1,11 @@
 # Phases 1 and 2: replay of the 720 stored runs, and the attempt pipeline
 
-Spend: $45.66 (Opus groups of 4 $28.28, stripping re-reviews $9.24, phase 2 smoke $7.73, Jev $0.40 for 3,980 calls / 9.5M tokens).
-Details: [HARD.md](HARD.md), [QUESTIONS.md](QUESTIONS.md), [PICKERS.md](PICKERS.md), [STRIP.md](STRIP.md), [PLANCHECK.md](PLANCHECK.md).
+Spend: $45.66 (Opus groups of 4 $28.28, clearing re-reviews $9.24, phase 2 smoke $7.73, Jev $0.40 for 3,980 calls / 9.5M tokens).
+Details: [HARD.md](HARD.md), [QUESTIONS.md](QUESTIONS.md), [PICKERS.md](PICKERS.md), [CLEAR.md](CLEAR.md), [PLANCHECK.md](PLANCHECK.md).
 
 ## Headline
 
-1. **Stripping committed runtime files is the biggest measured win.** 28 of 180 baseline runs (all forgestream, 47% of its runs) commit files the test suite writes (`docs/meetings/<date>-test.md`, `data/user_profile.json`, generated reports). Removing them cut merge cost on those runs from 3.57 to 1.80 (−1.77, 95% CI [−2.46, −1.14]), halved bad runs (12 → 6), and changed no hidden-test result. Both the deterministic detector and Jev find all 28 with no false alarms.
+1. **Clearing committed runtime files is the biggest measured win.** 28 of 180 baseline runs (all forgestream, 47% of its runs) commit files the test suite writes (`docs/meetings/<date>-test.md`, `data/user_profile.json`, generated reports). Clearing them cut merge cost on those runs from 3.57 to 1.80 (−1.77, 95% CI [−2.46, −1.14]), halved bad runs (12 → 6), and changed no hidden-test result. Both the deterministic detector and Jev find all 28 with no false alarms.
 2. **Measurement bug in the eval.** `fileKind` classed `*-test.md` as a test file, so the review step hid those meeting notes from the reviewers. Fixed in `lib.ts`. The 720-run conclusions compared conditions with the same blind spot (these files appear in 13–20% of every condition's runs), so the comparisons stand, but merge cost under-counted this problem everywhere.
 3. **Running each attempt's tests adds nothing here.** Zero visible-suite regressions and zero failing own tests across 180 baseline runs: the agent already leaves the tests green. Hidden-test failures are task-level (1 task fails for every attempt, 2 are mixed), so selection rarely rescues them. Cross-attempt tests (21 of 30 tasks had runnable tests) and new checker findings mostly mark hard tasks, not the worse attempt (within-task 0.50–0.56).
 4. **No cheap picker beats Opus, and Opus is noisy.** Captured share of the possible gain (random → best attempt):
@@ -38,8 +38,8 @@ Details: [HARD.md](HARD.md), [QUESTIONS.md](QUESTIONS.md), [PICKERS.md](PICKERS.
 
 - `plans.ts`: an Opus planner names the decision that matters and writes 4 complete plans taking different stances; Jev checks every pair differs and each plan covers the issue, with one rewrite on failure. Jev's own pick of the decisive axis disagreed with the planner on both smoke tasks (it said error handling for CRQA, where the algorithm was what mattered), so it is recorded, not used.
 - `run.ts --conditions seeded`: each attempt gets one plan.
-- `select.ts`: hard checks → strip stray files into `patch.clean.diff` → drop attempts that break tests → one Opus call over the survivors in shuffled order (Jev composite only trims more than 4 survivors).
-- Smoke (2 high-variance tasks, 4 seeded attempts each): seeding produced genuinely different attempts (CRQA: loops, vectorised numpy, scipy labelling, pyunicorn; seeded merge costs 3.5–12.5 and 0.0–9.0). The pipeline dropped the attempt whose own tests failed, stripped stray files from three, and picked the best attempt in both sets. Final picks scored 1.0 (CRQA, baseline mean 3.25) and 0.5 (retrieval-harness-259c0bc0, baseline mean 2.58) at about $2.40 per task. Two tasks are a mechanics check, not evidence.
+- `select.ts`: hard checks → clear stray files into `patch.clean.diff` → drop attempts that break tests → one Opus call over the survivors in shuffled order (Jev composite only trims more than 4 survivors).
+- Smoke (2 high-variance tasks, 4 seeded attempts each): seeding produced genuinely different attempts (CRQA: loops, vectorised numpy, scipy labelling, pyunicorn; seeded merge costs 3.5–12.5 and 0.0–9.0). The pipeline dropped the attempt whose own tests failed, cleared stray files from three, and picked the best attempt in both sets. Final picks scored 1.0 (CRQA, baseline mean 3.25) and 0.5 (retrieval-harness-259c0bc0, baseline mean 2.58) at about $2.40 per task. Two tasks are a mechanics check, not evidence.
 
 ## Your blind calls
 
@@ -47,4 +47,4 @@ Details: [HARD.md](HARD.md), [QUESTIONS.md](QUESTIONS.md), [PICKERS.md](PICKERS.
 
 ## Files
 
-`jev.ts` (cached client), `causes.ts` (comment labels), `jevq.ts` + `discover.ts` (question bank, 720 runs, robustness), `checks.ts` (hard checks, cross-attempt tests), `data.ts`, `qreport.ts`, `hardreport.ts`, `pickers.ts`, `bestofk.ts` (Opus groups of 4), `strip.ts`, `blind.ts`, `plans.ts`, `select.ts`.
+`jev.ts` (cached client), `causes.ts` (comment labels), `jevq.ts` + `discover.ts` (question bank, 720 runs, robustness), `checks.ts` (hard checks, cross-attempt tests), `data.ts`, `qreport.ts`, `hardreport.ts`, `pickers.ts`, `bestofk.ts` (Opus groups of 4), `clear.ts`, `blind.ts`, `plans.ts`, `select.ts`.

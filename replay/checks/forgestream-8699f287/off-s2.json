@@ -68,5 +68,5 @@
 	"runnableTests": [
 		"tests/emotion/test_rapport.py"
 	],
-	"strippedHiddenPass": true
+	"clearedHiddenPass": true
 }

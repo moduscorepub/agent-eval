@@ -99,5 +99,5 @@
 	"runnableTests": [
 		"tests/emotion/test_classifier.py"
 	],
-	"strippedHiddenPass": true
+	"clearedHiddenPass": true
 }

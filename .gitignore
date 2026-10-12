@@ -12,7 +12,7 @@ node_modules/
 # Replay: keep reports and small results; drop caches, logs, and patch/review copies.
 /replay/jev-cache/
 /replay/logs/
-/replay/strip/
+/replay/clear/
 /replay/smoke-final/
 /replay/checks/*/*/tests/
 /plans/events/

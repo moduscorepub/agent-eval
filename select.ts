@@ -8,8 +8,8 @@
  * 1. Hard checks (checks.ts): the visible suite (regressions and the attempt's own tests, each
  *    failure confirmed by an isolated re-run), new checker findings, stray runtime files, and every
  *    attempt's own tests run against the others in the set.
- * 2. Repair: stray runtime files (the deterministic detector, or Jev's per-file "produced by running
- *    the program" >= 0.5) are stripped from the attempt's patch into patch.clean.diff. Stripping never
+ * 2. Clearing: stray runtime files (the deterministic detector, or Jev's per-file "produced by running
+ *    the program" >= 0.5) are cleared from the attempt's patch into patch.clean.diff. Clearing never
  *    changed a hidden-test result in the replay.
  * 3. Attempts whose patch does not apply, or that break visible tests, are dropped (unless all do).
  * 4. One Opus call reads the repository and the surviving patches in a shuffled order (Opus favours
@@ -39,7 +39,7 @@ export const hardFailures = (c: RunChecks): string[] => [
 ];
 
 /** The patch without the given files' hunks. */
-export const stripFiles = (diff: string, files: string[]) =>
+export const clearFiles = (diff: string, files: string[]) =>
 	diff
 		.split(/^(?=diff --git )/m)
 		.filter(chunk => !files.some(f => chunk.startsWith(`diff --git a/${f} `)))
@@ -74,7 +74,7 @@ if (import.meta.main) {
 				const diff = fs.readFileSync(path.join(r.dir, "patch.diff"), "utf8");
 				const jev = await askAll(task, diff);
 				const stray = [...new Set([...checks.stray.files, ...jev.files.filter(f => f.generated >= 0.5).map(f => f.path)])].sort();
-				fs.writeFileSync(path.join(r.dir, "patch.clean.diff"), stripFiles(diff, stray));
+				fs.writeFileSync(path.join(r.dir, "patch.clean.diff"), clearFiles(diff, stray));
 				const risks = Object.fromEntries(COMPOSITE.map(q => [q, risk(jev, q)]));
 				return { name: r.name, hardFail: hardFailures(checks), stray, composite: Object.values(risks).reduce((a, b) => a + b, 0) / COMPOSITE.length, risks };
 			}),
@@ -102,7 +102,7 @@ if (import.meta.main) {
 		const attemptsCost = runs.reduce((a, r) => a + readJson<RunResult>(path.join(r.dir, "result.json")).cost, 0);
 		writeJson(out, { task: id, set: Number(setNo), chosen, patch: path.join(id, chosen, "patch.clean.diff"), opus, candidates, cost: { attempts: attemptsCost, opus: opus?.cost ?? 0 } });
 		console.log(
-			`${id} set ${setNo}: chose ${chosen}${opus && !opus.pick ? " (Opus unparseable; lowest composite)" : ""}; dropped ${candidates.length - passing.length}; stripped ${candidates.filter(c => c.stray.length).map(c => `${c.name}:${c.stray.length}`).join(" ") || "none"}; composite ${candidates.map(c => `${c.name}=${c.composite.toFixed(2)}`).join(" ")}`,
+			`${id} set ${setNo}: chose ${chosen}${opus && !opus.pick ? " (Opus unparseable; lowest composite)" : ""}; dropped ${candidates.length - passing.length}; cleared ${candidates.filter(c => c.stray.length).map(c => `${c.name}:${c.stray.length}`).join(" ") || "none"}; composite ${candidates.map(c => `${c.name}=${c.composite.toFixed(2)}`).join(" ")}`,
 		);
 	});
 	console.log("Jev spend so far", jevSpend());

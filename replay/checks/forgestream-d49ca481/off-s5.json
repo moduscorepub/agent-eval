@@ -99,5 +99,5 @@
 		"tests/emotion/test_classifier.py",
 		"tests/emotion/test_config.py"
 	],
-	"strippedHiddenPass": true
+	"clearedHiddenPass": true
 }

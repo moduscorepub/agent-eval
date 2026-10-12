@@ -53,5 +53,5 @@
 	"runnableTests": [
 		"tests/emotion/test_crqa_router.py"
 	],
-	"strippedHiddenPass": true
+	"clearedHiddenPass": true
 }

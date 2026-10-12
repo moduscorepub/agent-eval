@@ -61,5 +61,5 @@
 	"runnableTests": [
 		"tests/emotion/test_disengagement.py"
 	],
-	"strippedHiddenPass": false
+	"clearedHiddenPass": false
 }

@@ -7,9 +7,9 @@
  * Per task, in replay/checks/<task>/:
  * - base.json: the visible suite at the base commit and the files the suite itself writes.
  * - <cond>-s<n>.json: visible-suite regressions and own-test failures, new checker findings, stray
- *   files (written by the suite or shaped like runtime output), hidden tests with stray files stripped.
+ *   files (written by the suite or shaped like runtime output), hidden tests with stray files cleared.
  * - cross.json: every baseline attempt's own tests run against every other baseline attempt's tree.
- * Hidden tests are only ever used for the stripped-patch comparison, never as a picker signal.
+ * Hidden tests are only ever used for the cleared-patch comparison, never as a picker signal.
  */
 import * as fs from "node:fs";
 import * as os from "node:os";
@@ -47,7 +47,7 @@ export interface RunChecks {
 	checker: { count: number; findings: Finding[] };
 	stray: { files: string[]; suiteWritten: string[]; shaped: string[] };
 	/** Hidden tests on the tree with stray files reverted (only when stray files exist). */
-	strippedHiddenPass?: boolean;
+	clearedHiddenPass?: boolean;
 	testFiles: string[];
 	runnableTests: string[];
 }
@@ -217,7 +217,7 @@ export async function checkTask(task: Task, runs: { name: string; dir: string; b
 					else await mustSh(`git checkout HEAD~1 -- ${q(f)}`, { cwd: tree });
 				}
 				applyRef(task, tree, task.testFiles);
-				rec.strippedHiddenPass = (await sh(testCommand(task), { cwd: tree, timeoutMs: 10 * 60_000 })).code === 0;
+				rec.clearedHiddenPass = (await sh(testCommand(task), { cwd: tree, timeoutMs: 10 * 60_000 })).code === 0;
 				await reset(tree);
 			}
 
@@ -230,7 +230,7 @@ export async function checkTask(task: Task, runs: { name: string; dir: string; b
 			writeJson(path.join(outDir, `${run.name}.json`), rec);
 			trees.set(run.name, tree);
 			results.set(run.name, rec);
-			console.log(`${task.id} ${run.name}: suite ${rec.suite.failed}/${rec.suite.total} failed (${rec.suite.regressions.length} regressions, own ${rec.suite.ownFailed}/${rec.suite.ownTotal}), checker +${rec.checker.count}, stray ${rec.stray.files.length}${rec.strippedHiddenPass === undefined ? "" : `, stripped hidden ${rec.strippedHiddenPass ? "PASS" : "FAIL"}`}, ${Math.round(suite.ms / 1000)}s`);
+			console.log(`${task.id} ${run.name}: suite ${rec.suite.failed}/${rec.suite.total} failed (${rec.suite.regressions.length} regressions, own ${rec.suite.ownFailed}/${rec.suite.ownTotal}), checker +${rec.checker.count}, stray ${rec.stray.files.length}${rec.clearedHiddenPass === undefined ? "" : `, cleared hidden ${rec.clearedHiddenPass ? "PASS" : "FAIL"}`}, ${Math.round(suite.ms / 1000)}s`);
 		});
 
 		if (cross) {

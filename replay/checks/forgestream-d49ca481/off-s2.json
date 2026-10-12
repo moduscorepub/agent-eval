@@ -118,5 +118,5 @@
 		"tests/emotion/test_extractor.py",
 		"tests/emotion/test_live_stream_wiring.py"
 	],
-	"strippedHiddenPass": true
+	"clearedHiddenPass": true
 }

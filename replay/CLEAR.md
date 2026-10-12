@@ -1,16 +1,16 @@
-# Stray-file stripping
+# Stray-file clearing
 
-28 baseline runs had stray files. Each was reviewed twice as committed (now with every file visible to the reviewer) and twice with the stray files removed.
+28 baseline runs had stray files. Each was reviewed twice as committed (now with every file visible to the reviewer) and twice with the stray files cleared.
 
-| Measure | As committed | Stray files removed |
+| Measure | As committed | Stray files cleared |
 |---|---|---|
 | Mean merge cost | 3.57 | 1.80 |
 | Bad (merge ≥ 4) | 12 | 6 |
 | Hidden tests pass | 26/28 | 26/28 |
 
-Change from stripping: -1.77 per run (95% CI over 8 tasks: [-2.46, -1.14]). The original reviews (which never saw `docs/meetings/*-test.md`) averaged 2.36 on these runs.
+Change from clearing: -1.77 per run (95% CI over 8 tasks: [-2.46, -1.14]). The original reviews (which never saw `docs/meetings/*-test.md`) averaged 2.36 on these runs.
 
-| Run | Stray files | Old review | As committed | Stripped |
+| Run | Stray files | Old review | As committed | Cleared |
 |---|---|---|---|---|
 | forgestream-d49ca481 off-s5 | data/user_profile.json, docs/meetings/2026-10-11-test-arch-report.md, docs/meetings/2026-10-11-test.md | 8.0 | 5.5 | 2.5 |
 | forgestream-d49ca481 off-s2 | data/user_profile.json, docs/meetings/2026-10-11-test-arch-report.md, docs/meetings/2026-10-11-test.md | 4.5 | 4.0 | 1.0 |

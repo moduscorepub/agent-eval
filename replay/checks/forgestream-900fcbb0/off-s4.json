@@ -53,5 +53,5 @@
 	"runnableTests": [
 		"tests/emotion/test_transfer_entropy.py"
 	],
-	"strippedHiddenPass": true
+	"clearedHiddenPass": true
 }
