@@ -1,0 +1,24 @@
+{
+	"id": "retrieval-harness-894da0d0",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "894da0d094c9f95f5c8361bd652b122027de4f2a",
+	"parent": "8590d03ecb4bba3e84c369213fac9e8e78c0dc64",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_graph_route.py",
+		"tests/test_showroom_api.py"
+	],
+	"runnableTests": [
+		"tests/test_graph_route.py",
+		"tests/test_showroom_api.py"
+	],
+	"ref": {
+		"srcAdded": 94,
+		"srcRemoved": 3,
+		"files": 2
+	},
+	"message": "The graph route earns its wiring: one resolved entity, one registered relation, or fall closed to text",
+	"statement": "Title: Answer endpoint should execute graph-routed turns as a join when the entity and relation are unambiguous, otherwise fall back to text retrieval\n\nWhen the planner routes a turn to `graph`, `/api/answer` still runs ordinary text retrieval. The graph route is never executed, so join-shaped questions such as \"which risks does mitigation X treat?\" get no relational answer.\n\nDesired behavior: for a `route == \"graph\"` plan, the answer endpoint tries a graph join first. It uses `_graph_hits(question: str, plan: RetrievalPlan, req: AnswerRequest) -> SearchResponse | None` in `harness.showroom`.\n\nThe join runs only when both conditions hold:\n- Exactly one entity resolves from the plan's `seed_entity`, falling back to `standalone_query` and then the raw question. Zero or several matches do not qualify.\n- A registered traversal relation exists for that entity kind. This is the plan's `relation` if registered for the kind. Otherwise it is the kind's only registered relation, if there is exactly one.\n\nIf either condition fails, or the join returns no documents, `_graph_hits` returns `None`. The endpoint then falls closed to the normal text search arm. It must not guess an entity or relation.\n\nJoined results must pass the same eligibility and privilege door as any other hit, including `as_known_at` and temporal mode. Every hit must come back with `eligibility == \"eligible\"`. Bundles are assembled from those hits, with the door applied per member.\n\nThe returned `SearchResponse.config` must include `route_executed: \"graph\"`, `resolved: \"<kind>:<id>\"`, `relation`, and `calibration: \"unbound\"`. When the join is used, the text search arm must not run, and the answer streams as usual with that meta.\n\nIn the web UI, the working panel should show an \"executed as\" row, such as \"a join · risk:r1 → matter\", when `route_executed` is `\"graph\"`."
+}

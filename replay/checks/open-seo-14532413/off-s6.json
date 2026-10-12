@@ -1,0 +1,65 @@
+{
+	"run": "off-s6",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/server/lib/audit/crawl-window.test.ts",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "src/server/lib/audit/crawl-window.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/workflows/site-audit-workflow-helpers.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/workflows/siteAuditWorkflowCrawl.ts",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 812,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 9,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 2,
+		"findings": [
+			{
+				"file": "src/server/workflows/siteAuditWorkflowCrawl.ts",
+				"line": 197,
+				"tool": "oxlint",
+				"code": "eslint(no-unmodified-loop-condition)",
+				"message": "'queuedPersists' is not modified in this loop."
+			},
+			{
+				"file": "src/server/workflows/siteAuditWorkflowCrawl.ts",
+				"line": 197,
+				"tool": "oxlint",
+				"code": "eslint(no-unmodified-loop-condition)",
+				"message": "'MAX_QUEUED_PERSISTS' is not modified in this loop."
+			}
+		]
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"src/server/lib/audit/crawl-window.test.ts"
+	],
+	"runnableTests": [
+		"src/server/lib/audit/crawl-window.test.ts"
+	]
+}

@@ -1,0 +1,65 @@
+{
+	"run": "off-s3",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/server/lib/audit/crawl-window.test.ts",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "src/server/lib/audit/crawl-window.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/workflows/site-audit-workflow-helpers.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/workflows/siteAuditWorkflowCrawl.ts",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 813,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 10,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 2,
+		"findings": [
+			{
+				"file": "src/server/workflows/siteAuditWorkflowCrawl.ts",
+				"line": 195,
+				"tool": "oxlint",
+				"code": "eslint(no-unmodified-loop-condition)",
+				"message": "'queuedBatches' is not modified in this loop."
+			},
+			{
+				"file": "src/server/workflows/siteAuditWorkflowCrawl.ts",
+				"line": 195,
+				"tool": "oxlint",
+				"code": "eslint(no-unmodified-loop-condition)",
+				"message": "'MAX_QUEUED_PERSIST_BATCHES' is not modified in this loop."
+			}
+		]
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"src/server/lib/audit/crawl-window.test.ts"
+	],
+	"runnableTests": [
+		"src/server/lib/audit/crawl-window.test.ts"
+	]
+}

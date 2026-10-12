@@ -1,0 +1,40 @@
+{
+	"run": "off-s5",
+	"applied": true,
+	"files": [
+		{
+			"path": "forgestream/dashboard/api.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/emotion/test_dashboard_api.py",
+			"status": "M",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 346,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 5,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/emotion/test_dashboard_api.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_dashboard_api.py"
+	]
+}

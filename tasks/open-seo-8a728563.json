@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-8a728563",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "8a728563d48b393cc6bdc68c65b0636dcad19ac7",
+	"parent": "30948a2a1d5c66788e99a379158fbf23799d9b92",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/server/mcp/oauth-registration.test.ts"
+	],
+	"runnableTests": [
+		"src/server/mcp/oauth-registration.test.ts"
+	],
+	"ref": {
+		"srcAdded": 92,
+		"srcRemoved": 26,
+		"files": 2
+	},
+	"message": "fix(mcp): stop breaking public OAuth clients at token refresh (#420)",
+	"statement": "Public MCP OAuth clients lose their session at first token refresh\n\nMCP clients that register through dynamic client registration (`/api/auth/oauth2/register`) as public clients, with `token_endpoint_auth_method` set to `\"none\"` or omitted, currently fail when their access token expires. Codex is one example. It discards the client secret it receives at registration. The token endpoint treats the stored client as confidential, so the refresh grant fails with `invalid_client: missing client_secret`. The user then has to re-authenticate.\n\nThe cause is that the registration shim rewrites every public or omitted auth method to `client_secret_post`, so the stored client is confidential. It does this because Perplexity rejects a registration response that has no `client_secret`.\n\nExpected behavior:\n- `normalizeClientRegistrationRequest(request: Request)` registers clients as public. An explicit `\"none\"` stays `\"none\"`. An omitted `token_endpoint_auth_method` becomes `\"none\"`. Other auth methods and all other metadata fields pass through unchanged.\n- A new `withCompatibilityClientSecret(response: Response): Promise<Response>` post-processes the registration response. It applies only to a successful (201) response whose `token_endpoint_auth_method` is `\"none\"` and which has no `client_secret`. For those responses it returns a body that:\n  - reports `token_endpoint_auth_method: \"client_secret_post\"`;\n  - includes a placeholder `client_secret`, a 32-character lowercase hex string;\n  - sets `client_secret_expires_at: 0`;\n  - sets `client_secret_issued_at` equal to `client_id_issued_at`;\n  - keeps all other fields, such as `client_id`.\n- Confidential registrations and error responses (non-201) are returned untouched, as the same `Response` object.\n- The stored client stays public, so the token endpoint does not require the placeholder secret. Clients that send it and clients that never store it can both authenticate and refresh.\n\nThe Perplexity registration flow must keep working."
+}

@@ -1,0 +1,22 @@
+{
+	"id": "forgestream-900fcbb0",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "900fcbb07d8fa498c9904447733b9c54dd15baad",
+	"parent": "90e65fd2dfda5a0dc143b197d28c8118d32f872e",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/emotion/test_transfer_entropy.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_transfer_entropy.py"
+	],
+	"ref": {
+		"srcAdded": 98,
+		"srcRemoved": 0,
+		"files": 1
+	},
+	"message": "feat(emotion): add transfer entropy for directed vocal influence measurement",
+	"statement": "Add transfer entropy and symmetry scoring to forgestream.emotion\n\nThe emotion module has no way to measure directed influence between two speakers' vocal signals, which the symmetry component of rapport scoring needs. Add a new module `forgestream/emotion/transfer_entropy.py` with two public functions.\n\n`compute_transfer_entropy(source: list[float], target: list[float], lag: int = 1, n_bins: int = 8) -> float` returns the transfer entropy from `source` to `target` in bits. The result is never negative. It should be higher for TE(A→B) than TE(B→A) when B is driven by A's previous value. For independent random signals of about 200 samples, it should stay small (under 0.5 bits). If either series is too short to estimate (fewer than `lag + 2` samples, or too few usable samples after lagging), return `0.0`. Unequal-length series are truncated to the shorter one. Constant series and identical series must work and return a value >= 0.\n\n`compute_symmetry(te_a_to_b: float, te_b_to_a: float) -> float` turns the two directional values into a symmetry score. It returns 1.0 when they are equal, and approaches 0.0 as influence becomes fully one-directional. For example, `compute_symmetry(0.5, 0.1)` should be below 0.5. When both values are effectively zero, return 1.0."
+}

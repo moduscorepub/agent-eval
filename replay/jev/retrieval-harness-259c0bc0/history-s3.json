@@ -1,0 +1,49 @@
+{
+	"change": {
+		"stray": 0.05,
+		"alt_stray_1": 0.04,
+		"alt_stray_2": 0.08,
+		"unrequested": 0.17,
+		"alt_unrequested_1": 0.19,
+		"alt_unrequested_2": 0.33,
+		"extra_feature": 0.09,
+		"unrelated_edit": 0.12,
+		"speculative": 0.14,
+		"missing": 0.28,
+		"alt_missing_1": 0.27,
+		"alt_missing_2": 0.22,
+		"complete": 0.72,
+		"bug": 0.29,
+		"alt_bug_1": 0.54,
+		"alt_bug_2": 0.25,
+		"slow": 0.12,
+		"blocking_async": 0.04,
+		"swallow": 0.04,
+		"guessed": 0.19,
+		"stale_text": 0.15,
+		"wrong_place": 0.08,
+		"dup_within": 0.54,
+		"debris": 0.08,
+		"tests_added": 0.98,
+		"simpler": 0.33,
+		"style_mismatch": 0.19,
+		"focus": 0.9866666666666667,
+		"correct": 0.84,
+		"merge_ready": 0.7799999999999999
+	},
+	"reuse": {
+		"reimplements": 0.43
+	},
+	"files": [
+		{
+			"path": "README.md",
+			"generated": 0.03
+		},
+		{
+			"path": "docs/POLICY-retro-eligibility.md",
+			"generated": 0.02
+		}
+	],
+	"tokens": 16012,
+	"ms": 225.35299999999916
+}

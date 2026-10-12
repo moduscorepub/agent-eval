@@ -1,0 +1,72 @@
+{
+	"run": "off-s2",
+	"applied": true,
+	"files": [
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "forgestream/emotion/__init__.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/rapport.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "tests/emotion/test_rapport.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 335,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 10,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 2,
+		"findings": [
+			{
+				"file": "forgestream/emotion/rapport.py",
+				"line": 75,
+				"tool": "pyright",
+				"code": "reportUndefinedVariable",
+				"message": "\"Orchestrator\" is not defined"
+			},
+			{
+				"file": "forgestream/emotion/rapport.py",
+				"line": 158,
+				"tool": "pyright",
+				"code": "reportMissingTypeArgument",
+				"message": "Expected type arguments for generic class \"dict\""
+			}
+		]
+	},
+	"stray": {
+		"files": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"suiteWritten": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"shaped": [
+			"docs/meetings/2026-10-11-test.md"
+		]
+	},
+	"testFiles": [
+		"tests/emotion/test_rapport.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_rapport.py"
+	],
+	"strippedHiddenPass": true
+}

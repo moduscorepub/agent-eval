@@ -1,0 +1,53 @@
+{
+	"change": {
+		"stray": 0.9,
+		"alt_stray_1": 0.95,
+		"alt_stray_2": 0.95,
+		"unrequested": 0.54,
+		"alt_unrequested_1": 0.92,
+		"alt_unrequested_2": 0.92,
+		"extra_feature": 0.4,
+		"unrelated_edit": 0.69,
+		"speculative": 0.41,
+		"missing": 0.21,
+		"alt_missing_1": 0.21,
+		"alt_missing_2": 0.22,
+		"complete": 0.72,
+		"bug": 0.34,
+		"alt_bug_1": 0.4,
+		"alt_bug_2": 0.32,
+		"slow": 0.52,
+		"blocking_async": 0.63,
+		"swallow": 0.94,
+		"guessed": 0.39,
+		"stale_text": 0.23,
+		"wrong_place": 0.13,
+		"dup_within": 0.39,
+		"debris": 0.26,
+		"tests_added": 0.97,
+		"simpler": 0.5,
+		"style_mismatch": 0.29,
+		"focus": 0.6,
+		"correct": 0.8266666666666667,
+		"merge_ready": 0.6699999999999999
+	},
+	"reuse": {
+		"reimplements": 0.16
+	},
+	"files": [
+		{
+			"path": "data/user_profile.json",
+			"generated": 0.91
+		},
+		{
+			"path": "docs/meetings/2026-10-11-test-arch-report.md",
+			"generated": 0.8
+		},
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"generated": 0.79
+		}
+	],
+	"tokens": 15714,
+	"ms": 244.5112500000032
+}

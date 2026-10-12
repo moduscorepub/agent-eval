@@ -1,0 +1,67 @@
+{
+	"run": "off-s5",
+	"applied": true,
+	"files": [
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "forgestream/emotion/rapport.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "tests/emotion/test_rapport.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 337,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 12,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 2,
+		"findings": [
+			{
+				"file": "forgestream/emotion/rapport.py",
+				"line": 139,
+				"tool": "pyright",
+				"code": "reportCallIssue",
+				"message": "No overloads for \"sum\" match the provided arguments"
+			},
+			{
+				"file": "forgestream/emotion/rapport.py",
+				"line": 139,
+				"tool": "pyright",
+				"code": "reportArgumentType",
+				"message": "Argument of type \"Generator[str | float | bool, None, None]\" cannot be assigned to parameter \"iterable\" of type \"Iterable[_SupportsSumNoDefaultT@sum]\" in function \"sum\"\n  \"Generator[str | float | bool, None, None]\" is not assignable to \"Iterable[_SupportsSumNoDefaultT@sum]\"\n    Type parameter \"_T_co@Iterable\" is covariant, but \"str | float | bool\" is not a subtype of \"_SupportsSumNoDefaultT@sum\"\n      Type \"str | float | bool\" is not assignable to type \"_SupportsSumWithNoDefaultGiven\"\n        Type \"str | float | bool\" is not assignable to type \"_SupportsSumWithNoDefaultGiven\"\n          \"str\" is incompatible with protocol \"_SupportsSumWithNoDefaultGiven\""
+			}
+		]
+	},
+	"stray": {
+		"files": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"suiteWritten": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"shaped": [
+			"docs/meetings/2026-10-11-test.md"
+		]
+	},
+	"testFiles": [
+		"tests/emotion/test_rapport.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_rapport.py"
+	],
+	"strippedHiddenPass": true
+}

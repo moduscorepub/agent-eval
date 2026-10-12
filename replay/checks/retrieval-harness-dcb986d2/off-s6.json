@@ -1,0 +1,50 @@
+{
+	"run": "off-s6",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/harness/showroom.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/test_showroom_api.py",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "web/index.html",
+			"status": "M",
+			"kind": "other"
+		},
+		{
+			"path": "web/src/api.ts",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 77,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 12,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/test_showroom_api.py"
+	],
+	"runnableTests": [
+		"tests/test_showroom_api.py"
+	]
+}

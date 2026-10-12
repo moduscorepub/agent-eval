@@ -1,0 +1,24 @@
+{
+	"id": "retrieval-harness-259c0bc0",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "259c0bc0a61bd0778a58f6f28561e3d6a761a1c4",
+	"parent": "f787b4b83bdd863e1223365bfcb65ddeaccb5c14",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_door.py",
+		"tests/test_temporal_bundles.py"
+	],
+	"runnableTests": [
+		"tests/test_door.py",
+		"tests/test_temporal_bundles.py"
+	],
+	"ref": {
+		"srcAdded": 56,
+		"srcRemoved": 25,
+		"files": 8
+	},
+	"message": "Retro-eligibility built both ways: the ruling is Ben and Rob's, the default holds until they speak",
+	"statement": "Add opt-in \"shield\" mode so records excluded or archived later don't appear in as-of answers\n\nAs-of (temporal) retrieval currently shows records that were eligible at the requested date even if they have since been archived or excluded from retrieval. A written policy and the code disagreed on whether this is correct, and the ruling is pending from the policy owners. We need both behaviors available, with the current behavior remaining the default until a ruling is made.\n\nAdd a deployment setting, `DOOR_RETRO_ELIGIBILITY`. When it is unset (or any value other than `shield`), nothing changes. A record eligible at time T is returned for an as-of-T query even if it has since been archived or excluded.\n\nWhen `DOOR_RETRO_ELIGIBILITY=shield`, a non-audit temporal query must not return any record that is currently not eligible, whatever its eligibility was at T. This must apply consistently at the main retrieval door, at the per-member check inside evidence bundles, and at the graph join door. For graph joins, a doc is dropped if any of its rows is currently ineligible. Audit mode (`temporal_mode=\"audit\"`) is unaffected by the setting and still shows the record's own state at T. Non-temporal indexes are also unaffected.\n\nTo support this, temporal chunk rows must record whether the document is eligible in its latest state, as a new boolean `currently_eligible` column that defaults to true. Temporal indexing (`PgRetriever.index_temporal`) takes interval entries of `(Document, valid_from, valid_to_or_None, currently_privileged, currently_eligible)`. The history simulation must supply the new field, derived from the document's final eligibility state. The per-member check `_member_door_ok` in `bundle.py` gains a `currently_eligible: bool` parameter, placed after `currently_privileged` and before `context`.\n\nAdd a one-page policy document for the decision-makers. It should explain Policy A (current default) and Policy B (shield), include an example, and state the switch. Existing temporal indexes must be rebuilt to get the new column."
+}

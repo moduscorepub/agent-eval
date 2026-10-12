@@ -1,0 +1,53 @@
+{
+	"run": "off-s3",
+	"applied": true,
+	"files": [
+		{
+			"path": "forgestream/emotion/__init__.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/disengagement.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "tests/emotion/test_disengagement.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 320,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 5,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 1,
+		"findings": [
+			{
+				"file": "forgestream/emotion/disengagement.py",
+				"line": 56,
+				"tool": "pyright",
+				"code": "reportMissingTypeArgument",
+				"message": "Expected type arguments for generic class \"dict\""
+			}
+		]
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/emotion/test_disengagement.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_disengagement.py"
+	]
+}

@@ -1,0 +1,57 @@
+{
+	"run": "off-s1",
+	"applied": true,
+	"files": [
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "forgestream/emotion/crqa_router.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "pyproject.toml",
+			"status": "M",
+			"kind": "dep"
+		},
+		{
+			"path": "tests/emotion/test_crqa_router.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 326,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 6,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"suiteWritten": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"shaped": [
+			"docs/meetings/2026-10-11-test.md"
+		]
+	},
+	"testFiles": [
+		"tests/emotion/test_crqa_router.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_crqa_router.py"
+	],
+	"strippedHiddenPass": true
+}

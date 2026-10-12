@@ -1,0 +1,24 @@
+{
+	"id": "retrieval-harness-1ad941fa",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "1ad941fac2d9fcf0dfb12ff5f0a7c116bc0c2d96",
+	"parent": "919ce9c964c2eef304a1c0f68e438be9734bf188",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_market_backend.py",
+		"tests/test_market_kdbai_live.py"
+	],
+	"runnableTests": [
+		"tests/test_market_backend.py",
+		"tests/test_market_kdbai_live.py"
+	],
+	"ref": {
+		"srcAdded": 31,
+		"srcRemoved": 8,
+		"files": 4
+	},
+	"message": "The live route, mapped and written down: cloud is gone, the licence moved, the door is one login",
+	"statement": "Title: Support QIPC/REST client mode for local KDB.AI Server in the live parity path\n\nThe live KDB.AI parity path can't reach a local `kdbai-db` container. `LiveKdbaiTransport` only takes an endpoint and optional options, and KDB.AI Cloud (REST with an API key) has been retired. A local server exposes REST on 8081 and QIPC on 8082, so the client has to be told which one to use.\n\nAdd an optional `mode: str | None = None` parameter to `LiveKdbaiTransport.__init__(endpoint, database=\"default\", options=None, mode=None)`. Add a public `session_kwargs() -> dict` method that returns the keyword arguments used to open the `kdbai_client` session. The dict always has `endpoint`. It has `mode` only when a mode was given, and `options` only when options were given. For example, `mode=\"qipc\"` with `endpoint=\"http://localhost:8082\"` gives `{\"endpoint\": \"http://localhost:8082\", \"mode\": \"qipc\"}`. With no mode, the `mode` key must be absent so the client keeps its own default. Construction must still not dial the server.\n\nThe `marketparity` command should accept `--mode {qipc,rest}`, with `KDBAI_MODE` as the environment fallback, and pass the mode to the live transport. The live parity test should also read `KDBAI_MODE`. When `--backend kdbai` is run with no `KDBAI_ENDPOINT`, the refusal message should stop pointing at cloud credentials. It should give a local example endpoint (`http://localhost:8082`) and refer to `docs/KDBAI-LIVE-PARITY.md`.\n\nThat document should record the current route to a live server. `cloud.kdb.ai` now redirects to the marketing site. KDB.AI Server needs a KDB-X community licence at `~/.kx/kc.lic`. The `kdbai-db` image sits behind a bearer-token registry at `portal.dl.kx.com`. The licence and the token both come from one login on the `devxp` Keycloak realm at `auth.developer.kx.com`. The realm has self-registration and password reset disabled and federated login enabled, so the document should explain why an account can exist but fail to log in, what to try in order, and the steps from login to a passing live parity run. The README's live-path note should match."
+}

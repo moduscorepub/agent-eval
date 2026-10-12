@@ -1,0 +1,48 @@
+{
+	"suite": {
+		"ran": true,
+		"timedOut": false,
+		"exitCode": 1,
+		"total": 626,
+		"failed": [
+			"tests.audio.test_microphone.TestMicrophoneSource::test_list_devices",
+			"tests.audio.test_microphone.TestMicrophoneSource::test_start_opens_stream",
+			"tests.audio.test_microphone.TestMicrophoneSource::test_stop_closes_stream",
+			"tests.audio.test_microphone.TestSystemAudioSource::test_find_blackhole",
+			"tests.audio.test_microphone.TestSystemAudioSource::test_is_available",
+			"tests.audio.test_source.TestAudioSource::test_cannot_iterate_base_class",
+			"tests.events.test_store.TestEventStore::test_append_and_retrieve",
+			"tests.events.test_store.TestEventStore::test_append_multiple_events",
+			"tests.events.test_store.TestEventStore::test_filter_by_event_type",
+			"tests.events.test_store.TestEventStore::test_filter_by_branch",
+			"tests.events.test_store.TestEventStore::test_get_latest_evaluator",
+			"tests.events.test_store.TestEventStore::test_count_by_type",
+			"tests.events.test_subscribe.TestEventSubscriber::test_subscribe_receives_events",
+			"tests.events.test_subscribe.TestEventSubscriber::test_store_append_triggers_subscriber",
+			"tests.synthesis.test_contradiction_resolver.TestContradictionResolver::test_on_contradiction_emits_suggestion",
+			"tests.synthesis.test_contradiction_resolver.TestContradictionResolver::test_suggestion_has_high_priority",
+			"tests.synthesis.test_contradiction_resolver.TestContradictionResolver::test_suggestion_category_is_contradiction_resolution",
+			"tests.synthesis.test_contradiction_resolver.TestContradictionResolver::test_suggestion_has_probing_questions",
+			"tests.synthesis.test_contradiction_resolver.TestContradictionResolver::test_non_contradiction_events_ignored",
+			"tests.synthesis.test_proof_obligations.TestEventEmission::test_emits_proof_obligation_for_formalizable",
+			"tests.synthesis.test_proof_obligations.TestEventEmission::test_no_emission_for_non_formalizable",
+			"tests.synthesis.test_proof_obligations.TestEventEmission::test_proof_obligation_payload_structure",
+			"tests.synthesis.test_proof_obligations.TestEventEmission::test_proof_obligation_has_lean_stub",
+			"tests.synthesis.test_proof_obligations.TestEventEmission::test_non_claim_event_ignored",
+			"tests.synthesis.test_proof_obligations.TestDeduplication::test_dedup_same_claim_twice",
+			"tests.synthesis.test_proof_obligations.TestDeduplication::test_dedup_different_claims_both_emitted",
+			"tests.synthesis.test_proof_obligations.TestExportJson::test_exports_json",
+			"tests.synthesis.test_proof_obligations.TestExportJson::test_exports_multiple_obligations",
+			"tests.test_human_score_wiring.TestHumanScoreWiring::test_stop_passes_human_score_to_run_post_meeting",
+			"tests.test_human_score_wiring.TestHumanScoreWiring::test_stop_human_score_passed_to_pms_run",
+			"tests.test_milestone_a.TestMilestoneAIntegration::test_full_pipeline_with_persistence",
+			"tests.test_orchestrator.TestOrchestratorPersistence::test_process_event_writes_to_store"
+		],
+		"ms": 32363
+	},
+	"suiteWritten": [
+		"data/user_profile.json",
+		"docs/meetings/2026-10-12-test-arch-report.md",
+		"docs/meetings/2026-10-12-test.md"
+	]
+}

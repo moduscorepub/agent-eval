@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-2c153f9a",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "2c153f9a2098118971e93570a5fbb8731a01f9c1",
+	"parent": "d3c62aa5a21cf3d1657eb81e89f17865cd26286c",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/server/mcp/tools/dataforseo-research-tools.market.test.ts"
+	],
+	"runnableTests": [
+		"src/server/mcp/tools/dataforseo-research-tools.market.test.ts"
+	],
+	"ref": {
+		"srcAdded": 54,
+		"srcRemoved": 13,
+		"files": 1
+	},
+	"message": "feat(mcp): accept locationCode/languageCode on Labs research tools (#113)",
+	"statement": "Accept locationCode/languageCode on the get_ranked_keywords and find_serp_competitors MCP tools\n\nThe `get_ranked_keywords` and `find_serp_competitors` MCP tools only accept the legacy `market` object. It can only select the United States, so callers can't pick another country's Labs market for these tools.\n\nBoth tools should accept two new optional inputs:\n- `locationCode: number`: a country-level DataForSEO Labs location code.\n- `languageCode: string`: a language for that location.\n\nResolution rules:\n- An explicit `locationCode` or `languageCode` takes precedence over the legacy `market` object and over the project's default market. For example, with a Vietnam/`vi` project, `locationCode: 2756, languageCode: \"de\"` should query Switzerland/`de`.\n- If only `locationCode` is given, the language defaults to that location's primary language, not the project's language. `locationCode: 2276` with a `vi` project should use `de`.\n- A non-default language is accepted if the location serves it. Switzerland (2756) with `fr` is valid.\n- A language the location doesn't serve should be rejected with an error containing \"is not available for this location\". Germany (2276) with `fr` is one example.\n- A location that isn't supported by Labs domain analytics should be rejected before any paid DataForSEO call is made. The error should contain \"Domain analytics is not available for this country\". For example, `locationCode: 2352, languageCode: \"is\"`.\n- The `market` object keeps working as before. If neither it nor the new fields are given, the project's default market is used.\n\nThe tool input schemas and descriptions should show the new fields. They should also say that `market` is a legacy US-only selector."
+}

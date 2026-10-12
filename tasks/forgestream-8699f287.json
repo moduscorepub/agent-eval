@@ -1,0 +1,22 @@
+{
+	"id": "forgestream-8699f287",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "8699f287fc054f44c5e8fb1b80996f32ef686831",
+	"parent": "c8b5bfe7a62911d42f8aae5e01e4a19a37131764",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/emotion/test_rapport.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_rapport.py"
+	],
+	"ref": {
+		"srcAdded": 223,
+		"srcRemoved": 0,
+		"files": 1
+	},
+	"message": "feat(emotion): add RapportEngine with 4-component scoring and disengagement damping",
+	"statement": "Add RapportEngine: composite rapport scoring from prosodic and entrainment events\n\nForgeStream has no component that turns prosodic and entrainment data into a rapport measure. Add `forgestream.emotion.rapport.RapportEngine(orchestrator, meeting_count: int = 1, damping_factor: float = 0.3, runpod_endpoint: str = \"\", runpod_timeout: float = 4.0)` with `async on_event(event: Event) -> None` as the EventBus handler. Also add `interpolate_weights(meeting_count: int) -> dict[str, float]`.\n\nThe engine should track per-speaker arousal, valence and f0 from `PROSODIC_FEATURE` events. Each `ENTRAINMENT_SNAPSHOT` event should trigger a rapport computation. It should ignore events authored by `\"rapport_engine\"` so it doesn't loop on its own output. With fewer than two known speakers, a snapshot should emit nothing.\n\nFor each speaker pair, score four components in [0, 1]: attentiveness, positivity, coordination and symmetry. Combine them into a weighted composite that is damped when either speaker is detected as disengaged. `interpolate_weights` should return weights for those four keys that sum to 1.0. At meeting 1, attentiveness and positivity should outweigh coordination. By meeting 5 and later, coordination should outweigh both. Meeting 3 should fall between the two profiles.\n\nEach snapshot should emit one `RAPPORT_SCORE` event (author `\"rapport_engine\"`) through `orchestrator.process_event`. Its payload should contain:\n- `pair_scores`: one entry per speaker pair. Each entry has `speaker_a`, `speaker_b`, `attentiveness`, `positivity`, `coordination`, `symmetry`, `composite`, `disengagement_damped` and `surrogate_validated`.\n- `group_composite`: the mean of the pair composites, in [0, 1].\n- `group_trend`: the trend of recent group composites.\n- `disengaged_speakers`.\n- `weights_applied`.\n- `meeting_count`.\n- `timestamp_ms`.\n- `window_duration_ms`."
+}

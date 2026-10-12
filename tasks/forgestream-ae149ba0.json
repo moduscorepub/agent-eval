@@ -1,0 +1,22 @@
+{
+	"id": "forgestream-ae149ba0",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "ae149ba0761cc507657498a70d9a4c8917beedc9",
+	"parent": "8699f287fc054f44c5e8fb1b80996f32ef686831",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/emotion/test_rapport_wiring.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_rapport_wiring.py"
+	],
+	"ref": {
+		"srcAdded": 23,
+		"srcRemoved": 0,
+		"files": 2
+	},
+	"message": "feat(emotion): wire RapportEngine into Orchestrator and GeminiLiveStream",
+	"statement": "RapportEngine isn't wired into the live pipeline (Orchestrator / GeminiLiveStream)\n\nThe emotion pipeline already attaches an emotion correlator and a dynamics engine through the orchestrator. `RapportEngine` (`forgestream/emotion/rapport.py`) exists but is never created or subscribed to the EventBus. Running a live session therefore produces no rapport analysis, whatever `rapport_enabled` is set to.\n\nAdd `Orchestrator.attach_rapport_engine(self, meeting_count: int = 1, damping_factor: float = 0.3, runpod_endpoint: str = \"\", runpod_timeout: float = 4.0) -> RapportEngine`. It should build a `RapportEngine` bound to the orchestrator with those parameters, subscribe its `on_event` handler to the orchestrator's EventBus, and return it. It follows the same pattern as the existing correlator and dynamics-engine attach methods.\n\n`GeminiLiveStream` should expose a `rapport_engine` attribute.\n- When emotion is enabled and `config.rapport_enabled` is true, it is set from `orchestrator.attach_rapport_engine(...)`. The call passes `config.rapport_damping_factor`, `config.runpod_crqa_endpoint`, and `config.runpod_timeout_seconds`.\n- When emotion is enabled but `rapport_enabled` is false, `rapport_engine` is `None` and nothing is attached or subscribed.\n- When emotion is disabled, `rapport_engine` is `None`, as with the other emotion components."
+}

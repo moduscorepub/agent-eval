@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-3edbd0c1",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "3edbd0c11e2cb4aedea7d5c83fef8dad087f4839",
+	"parent": "d7cfbec796e5e24d436e396320c5b32a1ee2ccc3",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/server/features/gsc/searchAnalytics.test.ts"
+	],
+	"runnableTests": [
+		"src/server/features/gsc/searchAnalytics.test.ts"
+	],
+	"ref": {
+		"srcAdded": 18,
+		"srcRemoved": 11,
+		"files": 1
+	},
+	"message": "fix(gsc): clamp month-based date ranges instead of overflowing short months (#133)",
+	"statement": "GSC month-based date ranges overflow when the start date lands in a shorter month\n\n`resolveDateRange` in the GSC search analytics feature computes the start of `last_3_months`, `last_6_months`, `last_12_months` and `last_16_months` by subtracting calendar months from the end date. When the end date's day-of-month doesn't exist in the target month, the result rolls forward into the following month instead of landing on the last day of the target month.\n\nExample: `resolveDateRange({ dateRange: \"last_3_months\" }, new Date(\"2026-06-03T00:00:00Z\"))` yields an end date of `2026-05-31`. The start date should be `2026-02-28`, since 31 February doesn't exist. Instead it overflows into March, so the range is shorter than requested and the start date is wrong.\n\nThe 16-month floor that limits how far back a request can go has the same bug. For a \"today\" of `2026-06-30`, the floor should be `2025-02-28`. It currently overflows past that date.\n\nExpected: any month-based subtraction keeps the same day-of-month when the target month has it. Otherwise it clamps to the target month's last valid day. This applies to all four month-based ranges and to the 16-month floor, with all calculations in UTC. Day-based ranges (`last_7_days`, `last_28_days`) and explicit start/end dates must behave as before."
+}

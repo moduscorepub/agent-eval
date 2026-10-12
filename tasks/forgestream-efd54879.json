@@ -1,0 +1,22 @@
+{
+	"id": "forgestream-efd54879",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "efd54879baee6b21a8caba6987cfc2a629f959b4",
+	"parent": "900fcbb07d8fa498c9904447733b9c54dd15baad",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/emotion/test_disengagement.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_disengagement.py"
+	],
+	"ref": {
+		"srcAdded": 113,
+		"srcRemoved": 0,
+		"files": 1
+	},
+	"message": "feat(emotion): add DisengagementDetector with per-speaker baseline and hysteresis",
+	"statement": "Add DisengagementDetector to flag one-sided speaker disengagement from prosodic trends\n\nThe emotion module has no way to tell when one speaker has gone quiet and flat while the others stay engaged. We need a `forgestream.emotion.disengagement.DisengagementDetector(damping_factor: float = 0.3)` that consumes per-speaker prosodic snapshots and reports who is disengaged. That lets the rapport composite for affected speaker pairs be scaled down.\n\nInterface:\n- `update(speaker_id: str, features: dict) -> None` ingests a snapshot. Relevant keys are `energy_rms` and `f0_std`. Other keys, such as `arousal`, are accepted and ignored. Missing keys count as 0.0.\n- `is_disengaged(speaker_id: str) -> bool` returns `False` for unknown speakers.\n- `disengaged_speakers() -> list[str]` lists the currently flagged speaker IDs.\n- `get_pair_damping(speaker_a: str, speaker_b: str) -> float` returns `damping_factor` if either speaker is flagged, otherwise `1.0`. Unknown speakers are treated as not flagged.\n\nExpected behavior:\n- Each speaker has their own baseline for energy and F0 variability. It is built from their early updates and then adapts slowly. Judgement is based on a recent sliding window of snapshots compared with that baseline, so no flag is raised until enough history exists.\n- A speaker is flagged when their recent energy and F0 std both drop well below their own baseline (energy under about 60% of baseline, F0 std under about 40%) **and** at least one other speaker is still near their own normal energy level.\n- If every speaker goes quiet and flat together, nobody is flagged. That is a group lull, not disengagement.\n- Flagging uses hysteresis. Once flagged, the speaker stays flagged until both energy and F0 std recover to about 70% or more of baseline, and only then is the flag cleared.\n- A speaker with a zero or near-zero baseline must never be flagged, and the detector must not divide by zero.\n\nExample: two speakers each give 15 steady snapshots (energy 0.10, F0 std 30). Then `sp0` drops to energy 0.03 and F0 std 8 while `sp1` stays steady. After about 12 further updates, `sp0` should be flagged and `sp1` should not. If `sp0` then returns to energy 0.08 and F0 std 25 for about 12 updates, the flag should clear."
+}

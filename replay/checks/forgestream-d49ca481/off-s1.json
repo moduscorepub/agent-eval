@@ -1,0 +1,103 @@
+{
+	"run": "off-s1",
+	"applied": true,
+	"files": [
+		{
+			"path": "data/user_profile.json",
+			"status": "M",
+			"kind": "other"
+		},
+		{
+			"path": "docs/meetings/2026-10-11-test-arch-report.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "forgestream/config.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/classifier.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/extractor.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/features.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/live_stream.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/emotion/test_classifier.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 539,
+		"failed": 32,
+		"regressions": [],
+		"ownTotal": 20,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 2,
+		"findings": [
+			{
+				"file": "forgestream/emotion/classifier.py",
+				"line": 73,
+				"tool": "pyright",
+				"code": "reportOptionalMemberAccess",
+				"message": "\"generate\" is not a known attribute of \"None\""
+			},
+			{
+				"file": "forgestream/emotion/extractor.py",
+				"line": 56,
+				"tool": "pyright",
+				"code": "reportUndefinedVariable",
+				"message": "\"SenseVoiceClassifier\" is not defined"
+			}
+		]
+	},
+	"stray": {
+		"files": [
+			"data/user_profile.json",
+			"docs/meetings/2026-10-11-test-arch-report.md",
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"suiteWritten": [
+			"data/user_profile.json",
+			"docs/meetings/2026-10-11-test-arch-report.md",
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"shaped": [
+			"data/user_profile.json",
+			"docs/meetings/2026-10-11-test-arch-report.md",
+			"docs/meetings/2026-10-11-test.md"
+		]
+	},
+	"testFiles": [
+		"tests/emotion/test_classifier.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_classifier.py"
+	],
+	"strippedHiddenPass": true
+}

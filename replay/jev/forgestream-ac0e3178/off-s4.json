@@ -1,0 +1,45 @@
+{
+	"change": {
+		"stray": 0.31,
+		"alt_stray_1": 0.29,
+		"alt_stray_2": 0.68,
+		"unrequested": 0.27,
+		"alt_unrequested_1": 0.69,
+		"alt_unrequested_2": 0.89,
+		"extra_feature": 0.31,
+		"unrelated_edit": 0.34,
+		"speculative": 0.25,
+		"missing": 0.18,
+		"alt_missing_1": 0.16,
+		"alt_missing_2": 0.19,
+		"complete": 0.78,
+		"bug": 0.34,
+		"alt_bug_1": 0.43,
+		"alt_bug_2": 0.34,
+		"slow": 0.09,
+		"blocking_async": 0.02,
+		"swallow": 0.15,
+		"guessed": 0.26,
+		"stale_text": 0.23,
+		"wrong_place": 0.08,
+		"dup_within": 0.13,
+		"debris": 0.1,
+		"tests_added": 0.06,
+		"simpler": 0.5,
+		"style_mismatch": 0.22,
+		"focus": 0.6833333333333332,
+		"correct": 0.81,
+		"merge_ready": 0.6533333333333333
+	},
+	"reuse": {
+		"reimplements": 0.24
+	},
+	"files": [
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"generated": 0.61
+		}
+	],
+	"tokens": 7083,
+	"ms": 256.0840420000022
+}

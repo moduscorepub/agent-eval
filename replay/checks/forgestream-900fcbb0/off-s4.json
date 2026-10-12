@@ -1,0 +1,57 @@
+{
+	"run": "off-s4",
+	"applied": true,
+	"files": [
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "forgestream/emotion/__init__.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/transfer_entropy.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "tests/emotion/test_transfer_entropy.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 315,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 7,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"suiteWritten": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"shaped": [
+			"docs/meetings/2026-10-11-test.md"
+		]
+	},
+	"testFiles": [
+		"tests/emotion/test_transfer_entropy.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_transfer_entropy.py"
+	],
+	"strippedHiddenPass": true
+}

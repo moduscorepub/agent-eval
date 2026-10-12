@@ -1,0 +1,36 @@
+{
+	"run": "off-s6",
+	"applied": true,
+	"files": [
+		{
+			"path": "forgestream/emotion/crqa_router.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "pyproject.toml",
+			"status": "M",
+			"kind": "dep"
+		}
+	],
+	"suite": {
+		"total": 320,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 0,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [],
+	"runnableTests": []
+}

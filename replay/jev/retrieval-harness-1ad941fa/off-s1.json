@@ -1,0 +1,49 @@
+{
+	"change": {
+		"stray": 0.04,
+		"alt_stray_1": 0.03,
+		"alt_stray_2": 0.06,
+		"unrequested": 0.23,
+		"alt_unrequested_1": 0.21,
+		"alt_unrequested_2": 0.39,
+		"extra_feature": 0.13,
+		"unrelated_edit": 0.11,
+		"speculative": 0.17,
+		"missing": 0.18,
+		"alt_missing_1": 0.18,
+		"alt_missing_2": 0.2,
+		"complete": 0.8,
+		"bug": 0.18,
+		"alt_bug_1": 0.27,
+		"alt_bug_2": 0.18,
+		"slow": 0.05,
+		"blocking_async": 0.04,
+		"swallow": 0.06,
+		"guessed": 0.78,
+		"stale_text": 0.15,
+		"wrong_place": 0.09,
+		"dup_within": 0.52,
+		"debris": 0.14,
+		"tests_added": 0.96,
+		"simpler": 0.34,
+		"style_mismatch": 0.2,
+		"focus": 0.9900000000000001,
+		"correct": 0.8933333333333334,
+		"merge_ready": 0.8833333333333333
+	},
+	"reuse": {
+		"reimplements": 0.16
+	},
+	"files": [
+		{
+			"path": "README.md",
+			"generated": 0.02
+		},
+		{
+			"path": "docs/KDBAI-LIVE-PARITY.md",
+			"generated": 0.02
+		}
+	],
+	"tokens": 14181,
+	"ms": 272.2667909999982
+}

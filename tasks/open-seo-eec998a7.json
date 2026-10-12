@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-eec998a7",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "eec998a76233bb33e2dddbd921fc81da2eba1e0a",
+	"parent": "16b6d38ea8ea103c29ed5ef2440a8148f67aad61",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/server/features/rank-tracking/services/scheduledRankChecks.test.ts"
+	],
+	"runnableTests": [
+		"src/server/features/rank-tracking/services/scheduledRankChecks.test.ts"
+	],
+	"ref": {
+		"srcAdded": 44,
+		"srcRemoved": 12,
+		"files": 4
+	},
+	"message": "feat(rank-tracking): raise scheduler throughput 5x with rate-limit-derived sizing (#465)",
+	"statement": "Raise scheduled rank-check throughput and bound tick runtime\n\nThe scheduled rank-check cron admits at most 200 task units (keywords × devices) per 5-minute tick, and it fetches at most 200 due configs per tick. That uses only a small share of DataForSEO's 2,000 requests/min account cap. After the backlog from #462, draining the due configs would take days. The budget should go up to 1,000 units per tick. That is still well below the point where task_get polling from overlapping ticks could hit the rate limit. Throttled polls fall back to the more expensive live path, and customers are billed for that. The per-tick due-config fetch limit should go up to 500, so ticks with many free-plan or keywordless configs can still get through more than 200 rows.\n\nA tick with many skipped configs can also run long, because it makes serial plan-check round-trips per distinct org. That risks hitting the 15-minute cron kill. `runScheduledRankChecks(env)` should stop iterating configs once about 3 minutes of wall-clock time have passed. It should not start or claim any further configs after that point. Unprocessed configs must stay due, so the next tick picks them up oldest-first. The tick summary log should include a boolean `stoppedByDeadline`, next to the existing `stoppedByBudget`. It should be `true` only when the loop ended because of the deadline.\n\nThe cron handler in `src/server.ts` currently runs `reconcileStaleAudits` after `runScheduledRankChecks`. A slow rank tick delays the audit watchdog, and a wall-clock kill skips it completely. The watchdog should run first. If it throws, the error should be logged and held until the rank checks have run. It should then be rethrown, so the invocation still reports as failed and the rank checks are not suppressed."
+}

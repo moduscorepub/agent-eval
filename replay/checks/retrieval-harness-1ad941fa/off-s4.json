@@ -1,0 +1,62 @@
+{
+	"run": "off-s4",
+	"applied": true,
+	"files": [
+		{
+			"path": "README.md",
+			"status": "M",
+			"kind": "other"
+		},
+		{
+			"path": "docs/KDBAI-LIVE-PARITY.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "src/harness/cli.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/market/kdbai_backend.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/test_market_backend.py",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "tests/test_market_kdbai_live.py",
+			"status": "M",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 186,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 8,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/test_market_backend.py",
+		"tests/test_market_kdbai_live.py"
+	],
+	"runnableTests": [
+		"tests/test_market_backend.py",
+		"tests/test_market_kdbai_live.py"
+	]
+}

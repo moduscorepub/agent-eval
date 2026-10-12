@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-c40a0445",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "c40a04459c70ac65aea57e3a97f7f1e05b25bfed",
+	"parent": "211907ae32e5ebaefeba169bcae1e8baeacb1289",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/server/billing/subscription.test.ts"
+	],
+	"runnableTests": [
+		"src/server/billing/subscription.test.ts"
+	],
+	"ref": {
+		"srcAdded": 15,
+		"srcRemoved": 2,
+		"files": 1
+	},
+	"message": "fix(billing): retry missing Autumn balance (#450)",
+	"statement": "Title: Billing: transient missing Autumn monthly balance blocks usage-credit checks\n\n`assertUsageCreditsAvailable(organizationId)` calls Autumn to read the monthly SEO data balance (`AUTUMN_SEO_DATA_BALANCE_FEATURE_ID`) and the top-up balance. Autumn sometimes returns a successful response with no `balance` for the monthly feature, even though every hosted org holds that feature. The Autumn SDK's retry policy only covers failed HTTP requests, so this empty-but-successful read isn't retried.\n\nToday the first empty monthly read immediately throws `AppError(\"UPSTREAM_UNAVAILABLE\")`. Users with a valid balance are then blocked from usage-credit-gated features such as chat, only because of a momentary glitch.\n\nExpected behavior: if the monthly balance check comes back with no balance, wait briefly (about 300 ms) and re-check the monthly feature once. If the retry returns a balance, `assertUsageCreditsAvailable(\"org_123\")` resolves normally with that balance. For example, it resolves to `{ monthlyRemaining: 250 }` when the retry returns `remaining: 250`. A missing top-up balance is still treated as 0, and that read is not retried.\n\nIf the retry also returns no monthly balance, the call must still fail closed with `UPSTREAM_UNAVAILABLE`. A missing balance must not be coerced to 0. A persistent failure should produce exactly three Autumn checks: the monthly and top-up checks, then one monthly retry. Do not retry more than once."
+}

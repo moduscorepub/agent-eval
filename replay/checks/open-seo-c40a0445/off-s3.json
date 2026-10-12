@@ -1,0 +1,40 @@
+{
+	"run": "off-s3",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/server/billing/subscription.test.ts",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "src/server/billing/subscription.ts",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 825,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 8,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"src/server/billing/subscription.test.ts"
+	],
+	"runnableTests": [
+		"src/server/billing/subscription.test.ts"
+	]
+}

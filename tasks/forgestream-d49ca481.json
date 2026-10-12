@@ -1,0 +1,22 @@
+{
+	"id": "forgestream-d49ca481",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "d49ca48132f0915ef34d71d66f92e7e95832a208",
+	"parent": "f103d5ec747aab9eab327769fd06499540d28488",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/emotion/test_classifier.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_classifier.py"
+	],
+	"ref": {
+		"srcAdded": 175,
+		"srcRemoved": 2,
+		"files": 5
+	},
+	"message": "feat(emotion): add SenseVoice categorical emotion classifier with graceful degradation",
+	"statement": "Add SenseVoice categorical emotion classification to the emotion pipeline\n\nThe emotion pipeline currently emits only continuous prosodic features. The `emotion_tag` and `emotion_confidence` payload fields are hardcoded to `None`, with a \"Phase 1.5 adds SenseVoice\" placeholder. We need a categorical emotion label per analysis window, produced by FunASR SenseVoice-Small.\n\nAdd `forgestream.emotion.classifier.SenseVoiceClassifier(model_name: str = \"iic/SenseVoiceSmall\", sample_rate: int = 16000)`.\n- `SenseVoiceClassifier.is_available() -> bool` is a static method. It returns True only if `funasr` is importable.\n- `classify(signal: np.ndarray) -> tuple[str, float]` takes a 1-D int16 PCM array and returns `(emotion_tag, confidence)`. The tag is one of angry, disgusted, fearful, happy, neutral, other, sad, surprised, or unknown. The model must load lazily on the first call, not in the constructor. Any failure during classification must return `(\"unknown\", 0.0)` and log a warning, not raise.\n- `SenseVoiceClassifier._parse_emotion(text: str) -> tuple[str, float]` is a static method. It extracts the emotion from `<|TAG|>` tokens in SenseVoice output, case-insensitively. A recognised tag returns confidence 0.8. Text with no recognised tag, including an empty string, returns `(\"neutral\", 0.5)`.\n\n`ProsodicFeatures` gets `emotion_tag: str | None = None` and `emotion_confidence: float | None = None`. Both must appear in `to_payload()`, and `EmotionExtractor` must populate them. `EmotionExtractor.__init__` gains an optional `classifier: SenseVoiceClassifier | None = None` argument. With no classifier, both fields stay `None`. If the classifier raises, log it and keep going without dropping the event.\n\nAdd `ForgeStreamConfig.sensevoice_model: str = \"iic/SenseVoiceSmall\"`. `GeminiLiveStream` should create the classifier only when `emotion_ml_enabled` is true and `funasr` is installed. If `funasr` is missing, it should log at info level and run without categorical emotion, with no error. The prosodic pipeline must keep working either way."
+}

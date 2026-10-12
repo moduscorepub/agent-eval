@@ -1,0 +1,50 @@
+{
+	"run": "off-s1",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/server/features/keywords/services/research/serp.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/features/onboarding/onboardingMarketTools.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/lib/dataforseo/serp.test.ts",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "src/server/lib/dataforseo/serp.ts",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 733,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 3,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"src/server/lib/dataforseo/serp.test.ts"
+	],
+	"runnableTests": [
+		"src/server/lib/dataforseo/serp.test.ts"
+	]
+}

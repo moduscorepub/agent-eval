@@ -1,0 +1,41 @@
+{
+	"run": "off-s5",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/harness/gates.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/report.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/runner.py",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 59,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 0,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [],
+	"runnableTests": []
+}

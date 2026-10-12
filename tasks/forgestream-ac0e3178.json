@@ -1,0 +1,22 @@
+{
+	"id": "forgestream-ac0e3178",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "ac0e31786a3c44eebe72de6a128e8673e18024f2",
+	"parent": "ae149ba0761cc507657498a70d9a4c8917beedc9",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/emotion/test_rapport_governor.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_rapport_governor.py"
+	],
+	"ref": {
+		"srcAdded": 71,
+		"srcRemoved": 22,
+		"files": 3
+	},
+	"message": "feat(governor): integrate rapport into evaluator, axiom checker, and trust region",
+	"statement": "Governor should use rapport signals: evaluator, axiom checker, trust region\n\nThe SOS governor ignores rapport. `RAPPORT_SCORE` events are not used when scoring emotional engagement, the axiom checker cannot flag rapport degradation, and the trust region can't use rapport trend when recording meeting outcomes. Three changes are needed.\n\n1. **Evaluator.** `Evaluator.compute_metrics` should include `RAPPORT_SCORE` events in `emotional_engagement`. When at least one exists, use the `group_composite` value from the most recent one (default 0.5 if missing) with weight 0.4. The rest of the score comes from the prosodic features, with arousal weighted 0.3 and F0 variability weighted 0.3. When no `RAPPORT_SCORE` events exist, keep the current prosodic-only calculation: 0.4 arousal, 0.3 F0 variability, 0.3 energy. With neither event type, return 0.5. If rapport is present but prosodic events are absent, the prosodic parts take neutral defaults. The result stays clamped to [0, 1]. For example, a high `group_composite` of 0.85 with moderate prosody should give engagement above 0.6.\n\n2. **Axiom checker.** Add `AxiomChecker.check_rapport_trend(rapport_trajectory: list[float], disengaged: bool) -> AxiomResult`. It returns an advisory result with `axiom=\"rapport_advisory\"`. The result has `holds=False` only if `disengaged` is true, the trajectory has at least 3 entries, and rapport declines for at least 3 consecutive windows. The reason string reports the number of declines. In every other case, including no disengagement or a short trajectory, it returns `holds=True`. This is a warning, not a formal axiom violation.\n\n3. **Trust region.** Add an optional parameter to `TrustRegion.record_meeting_result(e_macro_improved: bool, axiom_violations: int, rapport_trend: float = 0.0)`. When `e_macro_improved` is true and `rapport_trend > 0.1`, `consecutive_improvements` should increase by 1.5 rather than 1. Otherwise it increases by 1 as before. Existing callers that omit `rapport_trend` must see no change in behavior."
+}

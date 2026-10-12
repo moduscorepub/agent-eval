@@ -1,0 +1,77 @@
+{
+	"run": "off-s6",
+	"applied": true,
+	"files": [
+		{
+			"path": "docs/POLICY-retro-eligibility.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "src/harness/bundle.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/db.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/door.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/graph_exec.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/history_sim.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/retriever_pg.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/test_door.py",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "tests/test_temporal_bundles.py",
+			"status": "M",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 71,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 9,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/test_door.py",
+		"tests/test_temporal_bundles.py"
+	],
+	"runnableTests": [
+		"tests/test_door.py",
+		"tests/test_temporal_bundles.py"
+	]
+}

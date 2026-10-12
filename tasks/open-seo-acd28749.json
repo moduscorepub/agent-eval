@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-acd28749",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "acd28749c8f82cf4b214bec00a3faeaaf73d2fec",
+	"parent": "32b1b1d38cbf14b92da3f0acecc952e9bcf607d2",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/client/features/search-tabs/useSearchTabs.test.ts"
+	],
+	"runnableTests": [
+		"src/client/features/search-tabs/useSearchTabs.test.ts"
+	],
+	"ref": {
+		"srcAdded": 23,
+		"srcRemoved": 223,
+		"files": 8
+	},
+	"message": "Auto-evict the oldest search tab at capacity, raise the limit to 20 (#442)",
+	"statement": "Search tabs: evict the oldest tab at capacity instead of blocking new searches, and raise the limit to 20\n\nSearch tabs on the backlinks, domain overview and keyword research pages are capped at 8. When the cap is reached, a new search is refused. The form shows \"Close a tab to open more searches (max 8).\" The keyword form also skips extra keywords from a multi-keyword submit. Users must close tabs by hand before they can search again.\n\nExpected behavior:\n- The cap is 20 tabs.\n- Opening a new search when 20 tabs are already open drops the oldest tab (first in order) and appends the new one as the active tab. The list stays at 20.\n- Below the cap, tabs are appended with no eviction.\n- Opening a search that matches an existing tab still activates that tab and does not evict anything.\n- A multi-keyword submit opens every keyword, evicting the oldest tabs as needed. The URL navigates to the last keyword submitted.\n- Capacity errors and the \"Close a tab…\" and \"N keywords skipped\" messages are removed from all three search forms.\n\nPersisted tab state is also affected. When stored state has more than 20 tabs, loading it should keep the newest 20, not the first ones.\n\nAdd an exported helper `appendTabWithEviction(tabs: SearchTab[], next: SearchTab): SearchTab[]`. It returns `tabs` plus `next`, with the oldest entries removed so the result has at most 20 items. Examples: 19 tabs plus a new one gives 20 with nothing evicted. 20 tabs plus a new one gives 20 with the first tab gone and the new one last.\n\n`parseStoredState` should apply the same \"keep newest\" rule, so 25 stored tabs load as tabs 5–24."
+}

@@ -1,0 +1,50 @@
+{
+	"run": "off-s1",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/server.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/features/rank-tracking/repositories/RankTrackingRepository.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/features/rank-tracking/services/scheduledRankChecks.test.ts",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "src/server/features/rank-tracking/services/scheduledRankChecks.ts",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 973,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 11,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"src/server/features/rank-tracking/services/scheduledRankChecks.test.ts"
+	],
+	"runnableTests": [
+		"src/server/features/rank-tracking/services/scheduledRankChecks.test.ts"
+	]
+}

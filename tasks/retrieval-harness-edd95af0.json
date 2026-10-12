@@ -1,0 +1,22 @@
+{
+	"id": "retrieval-harness-edd95af0",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "edd95af05bc02b99b706598fd76a309e969b1f71",
+	"parent": "874d10062a1b0710a8ee6fe99a6c715d200fcde6",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_backends_keys.py"
+	],
+	"runnableTests": [
+		"tests/test_backends_keys.py"
+	],
+	"ref": {
+		"srcAdded": 36,
+		"srcRemoved": 0,
+		"files": 1
+	},
+	"message": "The relay tier: answers and query embeddings with zero keys on their disk",
+	"statement": "Route OpenAI query embeddings through the Moot relay when MOOT_EMBED_VIA_RELAY is set\n\nDevices that run the harness without any OpenAI key on disk have no way to compute query embeddings. Answers already go through the relay tier, but `get_embedder(\"openai:...\")` always builds the direct OpenAI embedder, which needs `OPENAI_API_KEY`.\n\nAdd a `RelayEmbedder(proxied_spec: str, dims: int | None)` in `harness.embedders`. `get_embedder(spec)` should return it for any `openai:*` spec (with or without an `@dims` suffix) when the `MOOT_EMBED_VIA_RELAY` environment variable is set. When the variable is unset, `get_embedder` must keep returning `OpenAIEmbedder` with the same dims as before.\n\nThe relay embedder reads `MOOT_RELAY_URL` and raises a `RuntimeError` if it is missing. It reads `MOOT_RELAY_TOKEN` as a bearer token. `embed(texts)` POSTs JSON `{\"spec\": <full spec>, \"texts\": [...]}` to `<MOOT_RELAY_URL>/v1/embed`, with any trailing slash on the URL stripped. The request carries `Authorization: Bearer <token>` and `Content-Type: application/json`. The response is `{\"embeddings\": [[...], ...]}`, and those vectors are returned. Transient failures should be retried the same way the other network embedders retry them.\n\nThe embedder's `name`, which keys the embedding cache, must be the proxied spec (for example `openai:text-embedding-3-large@1024`), not a relay-specific name. Vectors already cached with the real OpenAI embedder then still hit, and only uncached query strings go to the relay. `dim` should be the requested dims, defaulting to 1024 when no `@dims` is given."
+}

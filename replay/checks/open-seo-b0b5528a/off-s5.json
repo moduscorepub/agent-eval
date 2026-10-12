@@ -1,0 +1,45 @@
+{
+	"run": "off-s5",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/server/mcp/server.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/server/mcp/tools/create-project.test.ts",
+			"status": "A",
+			"kind": "test"
+		},
+		{
+			"path": "src/server/mcp/tools/create-project.ts",
+			"status": "A",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 732,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 2,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"src/server/mcp/tools/create-project.test.ts"
+	],
+	"runnableTests": [
+		"src/server/mcp/tools/create-project.test.ts"
+	]
+}

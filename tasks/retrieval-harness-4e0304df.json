@@ -1,0 +1,22 @@
+{
+	"id": "retrieval-harness-4e0304df",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "4e0304df2d1fc01aca1cc3fcbeb8648daf091284",
+	"parent": "72723db257561b7b6f09b77f98ea64add9681a2a",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_embed_cache_threads.py"
+	],
+	"runnableTests": [
+		"tests/test_embed_cache_threads.py"
+	],
+	"ref": {
+		"srcAdded": 29,
+		"srcRemoved": 19,
+		"files": 1
+	},
+	"message": "The embed cache survives the threadpool: one lock, connection unbound from its birth thread",
+	"statement": "Embedder cache raises when `embed()` is called from a thread other than the one that built the embedder\n\nThe on-disk embed cache in `src/harness/embedders.py` (`_Cached`, used by embedders such as `HashEmbedder`) breaks when it's used from threads. The server calls `embed(texts: list[str]) -> list[list[float]]` from threadpool workers, never from the thread that constructed the embedder. When that happens, the sqlite cache raises a cross-thread usage error (`sqlite3.ProgrammingError`) on both the read path (looking up cached vectors) and the write path (storing newly embedded vectors).\n\nExpected: an embedder built on one thread can be used from any other thread. The first call with new text, a repeat call (in-process hit), and a fresh embedder instance reading what another thread wrote to the on-disk cache must all succeed and return the vectors.\n\nConcurrent calls to `embed()` on a single shared embedder instance from several threads, each with different texts, must also complete without errors and without corrupting the cache. Cache semantics stay the same: nothing is embedded twice, and results are keyed by embedder name and text.\n\nThe slow network embedding call must not block other threads while it runs. Only the cache access should be serialized."
+}

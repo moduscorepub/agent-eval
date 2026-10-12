@@ -1,0 +1,22 @@
+{
+	"id": "retrieval-harness-4803c24f",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "4803c24f9257e8a34ed8af5aca67d4006670affe",
+	"parent": "013bb5c6475b388b55e2e1a9272b7bdcc0536f61",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_calibration_method.py"
+	],
+	"runnableTests": [
+		"tests/test_calibration_method.py"
+	],
+	"ref": {
+		"srcAdded": 104,
+		"srcRemoved": 27,
+		"files": 3
+	},
+	"message": "Calibration grows a conscience about itself: tau chosen where holdout cannot see, applied only where it was trained",
+	"statement": "Calibration picks its refusal threshold on holdout, and serving applies it to configs it wasn't trained for\n\nThe calibration run trains on all of dev, then chooses the refusal threshold (`chosen_tau`) from the holdout operating curve. The holdout \"gate\" is therefore judged on data that selected the threshold, so the reported refusal precision and sacrifice are optimistic. The threshold should be chosen on a slice that holdout never touches. Dev should split deterministically (by qid hash, roughly one in four rows) into train and calibration. The model should train on train, and tau should be chosen on the calibration slice. Holdout should then be evaluated once, at that fixed tau. `run_calibration` should accept `top_k: int = 5` and record `top_k`, `temporal`, the cal curve, the holdout curve, and the holdout metrics at the chosen tau in the artifact.\n\nServing has a second problem. `/search` applies the loaded calibration artifact to any request. That includes requests with a different embedder, alpha, fetch_k, rerank, top_k, or temporal setting, such as the lexical-only fallback. Scores and refusals from those requests are meaningless. The artifact should apply only to the configuration it was trained under. Otherwise the response should be uncalibrated: no answerability score and no refusals. Legacy artifacts without `temporal` or `top_k` should still be bound to their own config.\n\nRequested interface:\n- `cal_split(rows) -> (train, cal)`: deterministic, disjoint, with `cal` about 25% of rows.\n- `point_at_tau(model, x, y, tau) -> dict`: returns `tau`, `coverage`, `refusal_precision`, `sacrifice` and `answer_precision` at one fixed threshold.\n- `calibration_applies(calib, cfg, embedder, temporal, top_k) -> bool`: false for a missing artifact or any mismatch in the fields above.\n\nThe search response config should report `calibration: \"bound\"` or `\"unbound\"`. The working panel should show a note when the calibration is unbound: confidence is withheld and nothing refuses."
+}

@@ -1,0 +1,22 @@
+{
+	"id": "retrieval-harness-ffcc10be",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "ffcc10bee19d5b6dee40598ca26879688fdc27d7",
+	"parent": "edd95af05bc02b99b706598fd76a309e969b1f71",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_showroom_api.py"
+	],
+	"runnableTests": [
+		"tests/test_showroom_api.py"
+	],
+	"ref": {
+		"srcAdded": 11,
+		"srcRemoved": 1,
+		"files": 3
+	},
+	"message": "The ship chooses its backend: defaults flow from the environment to the browser",
+	"statement": "Expose the server's default backend to the browser via GET /api/defaults\n\nThe showroom UI always starts with a hardcoded backend selection. Operators can't choose which backend a deployment uses without users changing it by hand in the browser.\n\nAdd a `GET /api/defaults` endpoint to the showroom API. It returns a JSON object of the form `{\"backend\": \"<name>\"}`. The value comes from the `MOOT_DEFAULT_BACKEND` environment variable. If the variable is unset, the endpoint returns `\"claude-cli\"`.\n\nThe endpoint reads the environment on each request. A change to `MOOT_DEFAULT_BACKEND`, including unsetting it, therefore shows up in the next response.\n\nThe web client needs a matching `api.defaults(): Promise<{ backend: string }>`. On app load, the client should fetch the defaults and use the returned `backend` as the initial backend selection. If the request fails, or the response has no `backend`, the app should keep its current built-in default. A failed request must not block the other startup data (indexes, gates, timeline, corpus)."
+}

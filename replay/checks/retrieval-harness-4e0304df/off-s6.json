@@ -1,0 +1,31 @@
+{
+	"run": "off-s6",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/harness/embedders.py",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 73,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 0,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [],
+	"runnableTests": []
+}

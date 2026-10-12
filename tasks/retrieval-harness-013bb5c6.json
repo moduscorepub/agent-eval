@@ -1,0 +1,22 @@
+{
+	"id": "retrieval-harness-013bb5c6",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "013bb5c6475b388b55e2e1a9272b7bdcc0536f61",
+	"parent": "c486de8d4bca5ff80777924a0682c328c7c8443e",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_metrics_honesty.py"
+	],
+	"runnableTests": [
+		"tests/test_metrics_honesty.py"
+	],
+	"ref": {
+		"srcAdded": 18,
+		"srcRemoved": 3,
+		"files": 4
+	},
+	"message": "Eval honesty: gold coverage, confidence-weighted recall, and the plan's own route on record",
+	"statement": "Eval reports should include gold coverage and confidence-weighted recall, and should record the planner's own route\n\n`harness.metrics.evaluate` reports only `recall_at_k`, `recall_strict` and `mrr`. A query with several gold docs counts as a full hit when one of them is found, and every pack row counts the same. Rows whose gold comes from production traces (`prod:ai_audit`, `prod:chat`) are noisier than human-written gold, but they are weighted like everything else. This overstates how well retrieval does.\n\nRequested changes:\n\n- **Gold coverage:** `evaluate` should return `gold_coverage`. For each scored row it is `|gold ∩ retrieved| / |gold|`, averaged over `n_scored`. For example, a row with gold `[a, b]` where only `a` is retrieved contributes 0.5, and a row with no hits contributes 0. It should be 0.0 when nothing was scored.\n- **Weighted recall:** `evaluate` should return `recall_weighted`, the recall hit rate weighted by each row's `gold_confidence`. For example, rows with confidence 1.0 (hit), 0.5 (miss) and 1.0 (hit) give (1+0+1)/2.5 = 0.8. A missing or falsy confidence counts as 1.0. The result is 0.0 when the total weight is zero.\n- **Multi-gold slice:** the slice breakdown should include `multigold:hit`, covering only rows with more than one gold doc.\n- **Row schema:** `PackRow` should gain `gold_confidence: float = 1.0` and `plan_route: str | None = None`. Old rows without these fields must still validate with those defaults.\n- **Confidence values:** pack rows built from production audit and chat traces should get `gold_confidence = 0.75`. All other rows keep 1.0. The row builder `_row` in `pack.py` should accept a `gold_confidence` argument.\n- **Planner route:** conversational \"plan\" variant rows should carry the planner's own route in `plan_route`, separate from the row's `route`."
+}

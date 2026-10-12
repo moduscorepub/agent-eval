@@ -1,0 +1,40 @@
+{
+	"change": {
+		"stray": 0.06,
+		"alt_stray_1": 0.04,
+		"alt_stray_2": 0.06,
+		"unrequested": 0.35,
+		"alt_unrequested_1": 0.41,
+		"alt_unrequested_2": 0.63,
+		"extra_feature": 0.27,
+		"unrelated_edit": 0.26,
+		"speculative": 0.46,
+		"missing": 0.33,
+		"alt_missing_1": 0.37,
+		"alt_missing_2": 0.31,
+		"complete": 0.64,
+		"bug": 0.5,
+		"alt_bug_1": 0.58,
+		"alt_bug_2": 0.42,
+		"slow": 0.15,
+		"blocking_async": 0.08,
+		"swallow": 0.19,
+		"guessed": 0.17,
+		"stale_text": 0.2,
+		"wrong_place": 0.13,
+		"dup_within": 0.36,
+		"debris": 0.11,
+		"tests_added": 0.05,
+		"simpler": 0.43,
+		"style_mismatch": 0.26,
+		"focus": 0.9733333333333333,
+		"correct": 0.7200000000000001,
+		"merge_ready": 0.62
+	},
+	"reuse": {
+		"reimplements": 0.73
+	},
+	"files": [],
+	"tokens": 11996,
+	"ms": 269.6322499999951
+}

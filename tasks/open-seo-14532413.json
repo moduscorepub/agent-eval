@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-14532413",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "145324138e3abc91713d2bf4e26ac08583738e11",
+	"parent": "acd28749c8f82cf4b214bec00a3faeaaf73d2fec",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/server/lib/audit/crawl-window.test.ts"
+	],
+	"runnableTests": [
+		"src/server/lib/audit/crawl-window.test.ts"
+	],
+	"ref": {
+		"srcAdded": 85,
+		"srcRemoved": 37,
+		"files": 3
+	},
+	"message": "Cap site-audit crawl memory: byte-budgeted window, 1 MiB read cap, persist backpressure (#445)",
+	"statement": "Site-audit crawls run out of memory on fast sites; cap in-flight HTML\n\nProduction site audits have died with `exceededMemory`. The workflow shares a 128 MB isolate with the rest of the worker. When a site answers quickly, the adaptive crawl window grows to 40 concurrent fetches. Each in-flight page holds its body, decoded to a UTF-16 string, so memory use is about double the HTML size. Pages fetched but not yet written can also pile up without limit, because persistence runs one batch at a time and a fast site can outpace the database.\n\nDesired behavior:\n\n- `adjustCrawlWindow(windowSize, recent)` should keep the window small enough that average page size times window size stays within a 16 MiB in-flight HTML budget.\n  - 1 MiB average pages should cap the window at 16.\n  - The window should never drop below the minimum of 5, even for very large pages (4 MiB average gives 5).\n  - For the budget calculation, treat the average page size as at least 64 KiB, so tiny pages can't disable the cap.\n  - Small pages should still be able to use the full window cap.\n- Heavy pages should no longer count as \"trouble\" that halves the window or blocks growth. Only non-ok fetches and very slow responses should do that. The byte budget now handles heavy pages.\n- The initial window should be 10 instead of 25, and the maximum should be 20 instead of 40. Growth steps stay at +5 on clean, fast batches.\n- The per-page HTML read cap should drop from 2 MiB to 1 MiB.\n- Blocked and error pages are also fetched and buffered, so they should report their body size as `htmlBytes` instead of 0. The byte budget then counts them.\n- The crawl loop should stop launching new fetches while more than 2 persist sub-batches are queued. It should resume once the queue drains, and it must not end the chunk early just because nothing is in flight while it waits."
+}

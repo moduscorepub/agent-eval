@@ -1,0 +1,50 @@
+{
+	"run": "off-s5",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/harness/serve.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/showroom.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/test_showroom_api.py",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "web/src/components/WorkingPanel.tsx",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 73,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 10,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/test_showroom_api.py"
+	],
+	"runnableTests": [
+		"tests/test_showroom_api.py"
+	]
+}

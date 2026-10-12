@@ -1,0 +1,45 @@
+{
+	"change": {
+		"stray": 0.74,
+		"alt_stray_1": 0.75,
+		"alt_stray_2": 0.37,
+		"unrequested": 0.45,
+		"alt_unrequested_1": 0.44,
+		"alt_unrequested_2": 0.67,
+		"extra_feature": 0.26,
+		"unrelated_edit": 0.29,
+		"speculative": 0.37,
+		"missing": 0.51,
+		"alt_missing_1": 0.41,
+		"alt_missing_2": 0.36,
+		"complete": 0.61,
+		"bug": 0.51,
+		"alt_bug_1": 0.6,
+		"alt_bug_2": 0.43,
+		"slow": 0.18,
+		"blocking_async": 0.1,
+		"swallow": 0.2,
+		"guessed": 0.22,
+		"stale_text": 0.24,
+		"wrong_place": 0.13,
+		"dup_within": 0.39,
+		"debris": 0.23,
+		"tests_added": 0.97,
+		"simpler": 0.43,
+		"style_mismatch": 0.27,
+		"focus": 0.8766666666666666,
+		"correct": 0.7166666666666667,
+		"merge_ready": 0.6666666666666666
+	},
+	"reuse": {
+		"reimplements": 0.39
+	},
+	"files": [
+		{
+			"path": "artifacts/calibration.json",
+			"generated": 0.8
+		}
+	],
+	"tokens": 18883,
+	"ms": 314.91512499999953
+}

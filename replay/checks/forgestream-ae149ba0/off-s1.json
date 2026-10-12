@@ -1,0 +1,63 @@
+{
+	"run": "off-s1",
+	"applied": true,
+	"files": [
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "forgestream/live_stream.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/orchestrator.py",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 333,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 0,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 2,
+		"findings": [
+			{
+				"file": "forgestream/orchestrator.py",
+				"line": 1,
+				"tool": "pyright",
+				"code": "reportImportCycles",
+				"message": "Cycle detected in import chain\n  /Users/mergimg0/projects/ponytail-eval/work/replay/replay__checks__forgestream-ae149ba0/off-s1/forgestream/orchestrator.py\n  /Users/mergimg0/projects/ponytail-eval/work/replay/replay__checks__forgestream-ae149ba0/off-s1/forgestream/synthesis/engine.py"
+			},
+			{
+				"file": "forgestream/orchestrator.py",
+				"line": 177,
+				"tool": "pyright",
+				"code": "reportUndefinedVariable",
+				"message": "\"RapportEngine\" is not defined"
+			}
+		]
+	},
+	"stray": {
+		"files": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"suiteWritten": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"shaped": [
+			"docs/meetings/2026-10-11-test.md"
+		]
+	},
+	"testFiles": [],
+	"runnableTests": [],
+	"strippedHiddenPass": true
+}

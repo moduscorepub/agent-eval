@@ -1,0 +1,114 @@
+{
+	"task": "retrieval-harness-259c0bc0",
+	"decision": {
+		"axis": "location",
+		"question": "Where is DOOR_RETRO_ELIGIBILITY resolved and how do the three doors (door_where SQL, bundle._member_door_ok, GraphExecutor.door_filter) share that shield decision without drifting apart?"
+	},
+	"plans": [
+		{
+			"title": "Helper read on every call in door.py",
+			"stance": "door.py owns a retro_shield() helper that reads os.environ on each call, and all three doors import it and apply their own currently_eligible check.",
+			"summary": "Add currently_eligible boolean NOT NULL DEFAULT true to temporal tables in db.create_chunk_table, write it from the 5-tuple in retriever_pg.index_temporal, and derive it in history_sim from the final segment state. door.py gains retro_shield(); door_where appends 'AND currently_eligible = true' for non-audit temporal queries under shield; _member_door_ok gains currently_eligible (after currently_privileged) and _neighbor_info selects it; door_filter aggregates bool_and(currently_eligible) and drops docs with any ineligible row. Extend test_door/test_temporal_bundles/test_temporal_graph with monkeypatch.setenv, and add docs/retro-eligibility-policy.md plus README notes on the switch and the index rebuild.",
+			"files": [
+				"src/harness/door.py",
+				"src/harness/bundle.py",
+				"src/harness/graph_exec.py",
+				"src/harness/db.py",
+				"src/harness/retriever_pg.py",
+				"src/harness/history_sim.py",
+				"tests/test_door.py",
+				"tests/test_temporal_bundles.py",
+				"tests/test_temporal_graph.py",
+				"docs/retro-eligibility-policy.md",
+				"README.md"
+			]
+		},
+		{
+			"title": "Constant read when door.py loads",
+			"stance": "Read the setting once into a door.py module constant, following db.py's HOST/PORT pattern, and have every door check that constant.",
+			"summary": "Same schema, indexing and history_sim changes as Plan 1, but door.py defines RETRO_ELIGIBILITY = os.environ.get('DOOR_RETRO_ELIGIBILITY', '') at import, and door_where, _member_door_ok and door_filter check door.RETRO_ELIGIBILITY == 'shield'. Tests monkeypatch harness.door.RETRO_ELIGIBILITY rather than the environment. The policy doc says a restart is needed to change modes, alongside the index rebuild.",
+			"files": [
+				"src/harness/door.py",
+				"src/harness/bundle.py",
+				"src/harness/graph_exec.py",
+				"src/harness/db.py",
+				"src/harness/retriever_pg.py",
+				"src/harness/history_sim.py",
+				"tests/test_door.py",
+				"tests/test_temporal_bundles.py",
+				"tests/test_temporal_graph.py",
+				"docs/retro-eligibility-policy.md",
+				"README.md"
+			]
+		},
+		{
+			"title": "Field on QueryContext",
+			"stance": "Carry the policy on QueryContext as a retro_eligibility field whose default comes from the environment, so each door reads it from the context just as it reads temporal_mode.",
+			"summary": "Add retro_eligibility: str = field(default_factory=lambda: os.environ.get('DOOR_RETRO_ELIGIBILITY', '')) to ports.QueryContext, documented next to temporal_mode, and keep it out of models.SearchRequest so clients cannot override it. door_where, _member_door_ok (new currently_eligible parameter) and door_filter check context.retro_eligibility == 'shield' and not audit; schema, index_temporal 5-tuple and history_sim changes match Plan 1. Tests build QueryContext(retro_eligibility='shield') directly and also cover the env default, plus the policy doc and README updates.",
+			"files": [
+				"src/harness/ports.py",
+				"src/harness/door.py",
+				"src/harness/bundle.py",
+				"src/harness/graph_exec.py",
+				"src/harness/db.py",
+				"src/harness/retriever_pg.py",
+				"src/harness/history_sim.py",
+				"tests/test_door.py",
+				"tests/test_temporal_bundles.py",
+				"tests/test_temporal_graph.py",
+				"docs/retro-eligibility-policy.md",
+				"README.md"
+			]
+		},
+		{
+			"title": "One Python decision function in door.py",
+			"stance": "Move the whole Python-side door decision, including shield, into a single door.door_ok function that bundle and graph_exec both call, alongside door_where for SQL.",
+			"summary": "door.py gains door_ok(eligibility, is_privileged, currently_privileged, currently_eligible, context, temporal), which reads DOOR_RETRO_ELIGIBILITY on each call, and door_where adds the matching currently_eligible predicate. bundle._member_door_ok keeps its required signature but just delegates to door_ok; graph_exec.door_filter selects bool_and(eligibility='eligible'), bool_or(is_privileged), bool_or(currently_privileged), bool_and(currently_eligible) and passes each doc's aggregates to door_ok, removing its inline rules. Schema, index_temporal, history_sim, tests, policy doc and README as in Plan 1.",
+			"files": [
+				"src/harness/door.py",
+				"src/harness/bundle.py",
+				"src/harness/graph_exec.py",
+				"src/harness/db.py",
+				"src/harness/retriever_pg.py",
+				"src/harness/history_sim.py",
+				"tests/test_door.py",
+				"tests/test_temporal_bundles.py",
+				"tests/test_temporal_graph.py",
+				"docs/retro-eligibility-policy.md",
+				"README.md"
+			]
+		}
+	],
+	"jev": {
+		"differ": {
+			"differ_0_1": 0.85,
+			"differ_0_2": 0.86,
+			"differ_0_3": 0.75,
+			"differ_1_2": 0.85,
+			"differ_1_3": 0.84,
+			"differ_2_3": 0.86
+		},
+		"complete": [
+			0.72,
+			0.54,
+			0.8,
+			0.7
+		],
+		"axis": "data_model",
+		"axisConfidence": 0.6114285714285713,
+		"axisProbabilities": {
+			"algorithm": 0.01,
+			"concurrency": 0,
+			"data_model": 0.6599999999999999,
+			"reuse": 0,
+			"location": 0.01,
+			"api_surface": 0.31,
+			"error_handling": 0,
+			"other": 0.01
+		}
+	},
+	"regenerated": false,
+	"problems": [],
+	"cost": 0.3821356,
+	"model": "anthropic/claude-opus-5-5"
+}

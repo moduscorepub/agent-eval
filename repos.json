@@ -1,0 +1,17 @@
+{
+	"open-seo": {
+		"path": "~/projects/open-seo",
+		"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+		"test": "pnpm exec vitest run {files}"
+	},
+	"forgestream": {
+		"path": "~/projects/forgestream",
+		"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+		"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}"
+	},
+	"retrieval-harness": {
+		"path": "~/projects/retrieval-harness",
+		"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+		"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}"
+	}
+}

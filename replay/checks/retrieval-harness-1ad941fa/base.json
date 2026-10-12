@@ -1,0 +1,11 @@
+{
+	"suite": {
+		"ran": true,
+		"timedOut": false,
+		"exitCode": 0,
+		"total": 185,
+		"failed": [],
+		"ms": 20106
+	},
+	"suiteWritten": []
+}

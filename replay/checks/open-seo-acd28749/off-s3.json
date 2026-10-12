@@ -1,0 +1,75 @@
+{
+	"run": "off-s3",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/client/features/backlinks/BacklinksPage.tsx",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/client/features/backlinks/BacklinksSearchCard.tsx",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/client/features/domain/DomainOverviewPage.tsx",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/client/features/keywords/hooks/useKeywordControlsForm.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/client/features/keywords/page/KeywordResearchPage.tsx",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/client/features/keywords/state/useKeywordResearchController.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/client/features/search-tabs/useSearchTabNavigation.ts",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/client/features/search-tabs/useSearchTabs.test.ts",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "src/client/features/search-tabs/useSearchTabs.ts",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 810,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 7,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"src/client/features/search-tabs/useSearchTabs.test.ts"
+	],
+	"runnableTests": [
+		"src/client/features/search-tabs/useSearchTabs.test.ts"
+	]
+}

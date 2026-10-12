@@ -1,0 +1,18 @@
+# Scratch checkouts, caches, and raw agent transcripts (regenerable or too large).
+/work/
+/.shared-data/
+node_modules/
+*.jsonl
+
+# Stored runs: keep only the final run's plan and report, not 2 GB of per-run artifacts.
+/runs/*
+!/runs/final/
+/runs/final/*/
+
+# Replay: keep reports and small results; drop caches, logs, and patch/review copies.
+/replay/jev-cache/
+/replay/logs/
+/replay/strip/
+/replay/smoke-final/
+/replay/checks/*/*/tests/
+/plans/events/

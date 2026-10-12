@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-d3c62aa5",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "d3c62aa5a21cf3d1657eb81e89f17865cd26286c",
+	"parent": "3edbd0c11e2cb4aedea7d5c83fef8dad087f4839",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/client/features/search-tabs/useSearchTabs.test.ts"
+	],
+	"runnableTests": [
+		"src/client/features/search-tabs/useSearchTabs.test.ts"
+	],
+	"ref": {
+		"srcAdded": 22,
+		"srcRemoved": 5,
+		"files": 1
+	},
+	"message": "fix(search-tabs): keep tabs without explicit location across reloads (#108)",
+	"statement": "Search tabs opened at the default location disappear after a page reload\n\nSearch tabs opened without an explicit location (the default location) are dropped when the saved tab list is restored on reload. Both domain and keyword tabs are affected. The default-location case persists no `locationCode`, but restoring currently rejects any tab whose input lacks a numeric `locationCode`. Users lose those tabs, and the active tab selection goes with them.\n\nExpected: a persisted domain or keyword tab with no `locationCode` is restored intact. Its input keeps all other fields, and `locationCode` stays undefined so the default location still applies. The active tab ID is preserved when it refers to a restored tab. A tab with an explicit numeric `locationCode`, such as 2840, still restores as before.\n\nValidation of malformed inputs must stay strict. These must still be discarded:\n- A domain tab with no domain.\n- A keyword tab with an unsupported `resultLimit`.\n- A tab whose `locationCode` is present but not a number, such as `\"us\"`.\n- A tab with an unknown `type`.\n\nThe stored-state parser, `parseStoredState(value: unknown): TabsState` in `useSearchTabs`, must be exported so this restore behavior can be exercised directly."
+}

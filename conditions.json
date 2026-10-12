@@ -1,0 +1,10 @@
+{
+	"off": { "extensions": [] },
+	"ponytail": { "extensions": ["conditions/ponytail/extensions/ponytail.js"] },
+	"grain": { "extensions": ["conditions/grain/grain.ts"] },
+	"gate": { "extensions": ["conditions/gate/gate.ts"] },
+	"checkers": { "extensions": ["conditions/checkers/checkers.ts"] },
+	"approach": { "extensions": ["conditions/approach/approach.ts"] },
+	"history": { "extensions": ["conditions/history/history.ts"] },
+	"seeded": { "extensions": [], "plans": true }
+}

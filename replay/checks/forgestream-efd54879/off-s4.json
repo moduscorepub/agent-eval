@@ -1,0 +1,65 @@
+{
+	"run": "off-s4",
+	"applied": true,
+	"files": [
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "forgestream/emotion/__init__.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/disengagement.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "tests/emotion/test_disengagement.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 319,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 4,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 1,
+		"findings": [
+			{
+				"file": "forgestream/emotion/disengagement.py",
+				"line": 55,
+				"tool": "pyright",
+				"code": "reportMissingTypeArgument",
+				"message": "Expected type arguments for generic class \"dict\""
+			}
+		]
+	},
+	"stray": {
+		"files": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"suiteWritten": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"shaped": [
+			"docs/meetings/2026-10-11-test.md"
+		]
+	},
+	"testFiles": [
+		"tests/emotion/test_disengagement.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_disengagement.py"
+	],
+	"strippedHiddenPass": false
+}

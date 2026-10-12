@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-c81fd7a1",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "c81fd7a130effb0bac2fa79c6a0f8ec0ab38d14e",
+	"parent": "72c1cf0b8e3eb0f58f1649afc8cff77f879f686d",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/server/lib/dataforseo/serp.test.ts"
+	],
+	"runnableTests": [
+		"src/server/lib/dataforseo/serp.test.ts"
+	],
+	"ref": {
+		"srcAdded": 6,
+		"srcRemoved": 3,
+		"files": 3
+	},
+	"message": "Rank positions: report organic rank (rank_group), not absolute SERP slot (#429)",
+	"statement": "Rank tracker reports SERP slot instead of organic position (#429)\n\nA domain that is the #1 organic result for a keyword can show as position 3 or 4 in the rank tracker. The reported position counts SERP features (local pack, People Also Ask, AI overviews) as slots, which is DataForSEO's `rank_absolute`. Users count their ranking among organic results only, which is `rank_group`, so the tracker makes their ranking look worse than it is.\n\nExpected: a rank check for a keyword returns the domain's position among organic results only. The same applies to the rank shown in the keyword-research SERP result list and the onboarding market snapshot (top 10 organic results). When `rank_group` is missing from an item, fall back to `rank_absolute`. When both are missing, keep the existing fallback (`0` in the keyword-research list, `null` elsewhere).\n\nExample: the domain is the first organic result, but a local pack and a PAA block sit above it. The rank check should return position 1. Today it returns 3 or 4.\n\nOut of scope: the MCP `get-serp-results` tool returns every SERP item type, not just organic ones. It should keep reporting `rank_absolute`, because the absolute slot is the meaningful value there."
+}

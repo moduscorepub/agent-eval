@@ -1,0 +1,22 @@
+{
+	"id": "retrieval-harness-dcb986d2",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "dcb986d29e2adf6ad281610dfa9696de529918a4",
+	"parent": "4e0304df2d1fc01aca1cc3fcbeb8648daf091284",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_showroom_api.py"
+	],
+	"runnableTests": [
+		"tests/test_showroom_api.py"
+	],
+	"ref": {
+		"srcAdded": 62,
+		"srcRemoved": 51,
+		"files": 3
+	},
+	"message": "A stream that fails now says so: the error event replaces the severed connection, and the favicon stops crying 404",
+	"statement": "Title: /api/answer stream drops the connection on server errors instead of reporting them; favicon request 404s\n\nWhen a backend step of `POST /api/answer` raises (search function, query planning, graph lookup, answer drafting, or sitting logging), the exception escapes the SSE generator. The chunked response is cut off after the 200 headers have already been sent. The browser then shows an opaque network error, and the client has no way to tell what went wrong.\n\nExpected: the stream always ends with a readable event. If any step fails, the server emits an SSE event named `error` with the payload `{\"detail\": \"<ExceptionType>: <message>\"}`. The response status stays 200, because headers are already sent. For example, if the search function raises `RuntimeError(\"the embedder tier fell over mid-request\")`, the response must contain an `error` event whose `detail` includes that message. Any `meta` event already sent before the failure is still delivered.\n\nThe web client's `api.answer` stream handler in `web/src/api.ts` currently ignores unknown events. It should treat an `error` event as a failure and raise an `Error` with the `detail` text, so the UI can show the real cause.\n\nSeparately, loading `web/index.html` makes the browser request `/favicon.ico`, which returns 404 and adds noise to the console and server logs. The page should declare an empty icon so that request is no longer made."
+}

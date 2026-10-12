@@ -1,0 +1,22 @@
+{
+	"id": "open-seo-b0b5528a",
+	"repo": "open-seo",
+	"repoPath": "/Users/mergimg0/projects/open-seo",
+	"sha": "b0b5528a3acb31eaf4493ee0b3def79ffdf119a8",
+	"parent": "2c153f9a2098118971e93570a5fbb8731a01f9c1",
+	"setup": "pnpm install --frozen-lockfile --prefer-offline --reporter=silent",
+	"test": "pnpm exec vitest run {files}",
+	"testFiles": [
+		"src/server/mcp/tools/create-project.test.ts"
+	],
+	"runnableTests": [
+		"src/server/mcp/tools/create-project.test.ts"
+	],
+	"ref": {
+		"srcAdded": 108,
+		"srcRemoved": 0,
+		"files": 2
+	},
+	"message": "feat(mcp): add create_project tool (#114)",
+	"statement": "Add a `create_project` MCP tool\n\nMCP clients can list projects with `list_projects`, but they can't create one. A user working through an MCP client has to leave it and use the dashboard before any project-scoped tool will work. Please add an MCP tool named `create_project` that creates a project in the caller's organization.\n\nInput is `{ name: string; domain?: string; locationCode?: number; languageCode?: string }`.\n- `name` is required, trimmed, and 1–120 characters.\n- `domain` is an optional host-only root domain. It's normalized the same way as when a project is created in the dashboard.\n- `locationCode` is an optional DataForSEO location code. If it's omitted, the organization's default market applies.\n- `languageCode` is optional, but it requires `locationCode`. Passing a `languageCode` without a `locationCode` must be rejected, with the same rule the dashboard uses. When only `locationCode` is given, the language is resolved from the location.\n\nOn success the tool returns the created project as `{ id, name, domain, locationCode, languageCode, url }`. `url` is the dashboard link `<baseUrl>/p/<id>`. The structured output carries this under `project`. The text response should include the new project id, name, domain if there is one, and the market. The `id` can then be passed as `projectId` to other OpenSEO tools.\n\nThe tool must:\n- be scoped to the authenticated caller's organization\n- not call DataForSEO or use credits\n- be registered with the other tools on the OpenSEO MCP server\n- be annotated as non-read-only, non-destructive and not open-world\n\nThe description should tell clients to call `list_projects` first to avoid duplicates."
+}

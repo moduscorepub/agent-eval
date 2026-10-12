@@ -1,0 +1,40 @@
+{
+	"run": "off-s6",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/server/mcp/tools/dataforseo-research-tools.market.test.ts",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "src/server/mcp/tools/dataforseo-research-tools.ts",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 730,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 10,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"src/server/mcp/tools/dataforseo-research-tools.market.test.ts"
+	],
+	"runnableTests": [
+		"src/server/mcp/tools/dataforseo-research-tools.market.test.ts"
+	]
+}

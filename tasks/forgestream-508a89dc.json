@@ -1,0 +1,22 @@
+{
+	"id": "forgestream-508a89dc",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "508a89dc38b4a8211667be70000926eaf1d7a8bd",
+	"parent": "81126209233cf45d34c0113b0cd5800b06f0ac02",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_sentinel_listener.py"
+	],
+	"runnableTests": [
+		"tests/test_sentinel_listener.py"
+	],
+	"ref": {
+		"srcAdded": 26,
+		"srcRemoved": 0,
+		"files": 1
+	},
+	"message": "feat(sentinel-listener): hallucination filters",
+	"statement": "Sentinel listener: filter out Whisper repetition-loop hallucinations\n\nThe sentinel listener (`scripts/sentinel_listener.py`) sometimes emits transcripts where Whisper has fallen into a decoding loop. Examples we've seen live are \"here, here, here, here\" and \"thank you thank you thank you\". These come through as real transcript events and pollute the log. The current `model.transcribe()` call uses Whisper's default compression-ratio guard (2.4), which is too loose to catch compressed-token loops like \"you you you you\".\n\nRequested behavior:\n- Tighten the compression-ratio guard so loop segments are dropped before they are emitted. A threshold of 2.0 is suggested.\n- Add `is_repetitive(text: str) -> bool` to the module. It returns True when any phrase of 1 to 4 words appears 3 or more times back to back. The comparison is case-insensitive and ignores punctuation attached to words, so \"Here, here, here, here.\" and \"Here HERE here Here\" both count.\n- The transcription path should discard the text (return an empty string) when `is_repetitive` flags it.\n\nEdge cases:\n- Empty text and text under 3 words return False.\n- Normal speech returns False, e.g. \"I'd start with partitioning then move to backpressure and replication.\"\n- Two consecutive repeats (\"really really amazing day\") return False, because that is just emphasis.\n- Repeats that are not consecutive (\"I went here and then there and then back here and home\") return False.\n- Bigram, trigram and 4-gram loops must be caught, e.g. \"thank you thank you thank you\", \"going to be going to be going to be\", and \"we can see we can see we can see we can see the answer\".\n\nOut of scope: leave `log_prob_threshold` and the webrtcvad pre-gate unchanged."
+}

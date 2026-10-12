@@ -1,0 +1,45 @@
+{
+	"run": "off-s3",
+	"applied": true,
+	"files": [
+		{
+			"path": "forgestream/emotion/crqa_router.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "pyproject.toml",
+			"status": "M",
+			"kind": "dep"
+		},
+		{
+			"path": "tests/emotion/test_crqa_router.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 329,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 9,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 0,
+		"findings": []
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/emotion/test_crqa_router.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_crqa_router.py"
+	]
+}

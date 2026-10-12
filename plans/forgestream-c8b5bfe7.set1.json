@@ -1,0 +1,81 @@
+{
+	"task": "forgestream-c8b5bfe7",
+	"decision": {
+		"axis": "algorithm",
+		"question": "How should the local CPU fallback extract CRQA line statistics (DET/LAM, plus TT/ENTR) from the cross-recurrence matrix of the standardized F0 series: explicit Python run-length loops, vectorised numpy run-length encoding, scipy segment labelling, or a third-party CRQA library with real embedding?"
+	},
+	"plans": [
+		{
+			"title": "Design-doc router with run-length loops",
+			"stance": "Follow Task 4 of the rapport plan closely: z-score both series, build the recurrence matrix with the same numpy broadcast as dynamics.compute_crqa_recurrence_rate, and count diagonal and vertical line lengths with plain Python run-length loops in static methods on CRQAComputeRouter.",
+			"summary": "Create forgestream/emotion/crqa_router.py with the CRQAResult dataclass, module constants CIRCUIT_OPEN_THRESHOLD=3 and CIRCUIT_SKIP_CYCLES=5, and a router whose compute() returns zeros for series under 10 samples (before any breaker change), skips RunPod when the endpoint is empty or _should_skip() uses up one of the 5 skips, and otherwise POSTs {f0_a,f0_b,params:{embedding_dim,time_delay,radius,n_surrogates:20}} to {endpoint}/crqa/validate with httpx.AsyncClient(timeout); raise_for_status/KeyError/httpx errors all log a warning, increment _consecutive_failures, open the circuit with _skip_remaining=5 at >=3 failures and fall back, and a success resets failures and closes the circuit. Success maps real.det/real.tt to 0.0 unless significant.det/significant.tt is true and sets surrogate_validated=True. _local_compute uses the radius*combined_std*3 threshold, gets rr from the matrix mean, and gets det/lam from static _diagonal_line_lengths/_vertical_line_lengths loops (lines >=2); tt is the mean vertical line length and entr the Shannon entropy of diagonal lengths, so no local field is a placeholder. Add httpx to the emotion and dev extras; tests cover short input, local det>=0 and surrogate_validated=False, the payload and URL, significance gating, warning via caplog, 3-failure open, 5 skipped calls with post not awaited, retry on the 6th call, and success reset.",
+			"files": [
+				"forgestream/emotion/crqa_router.py",
+				"tests/emotion/test_crqa_router.py",
+				"pyproject.toml"
+			]
+		},
+		{
+			"title": "Vectorised numpy run-length helpers",
+			"stance": "Compute every diagonal and vertical run length with vectorised numpy run-length encoding (zero-pad, np.diff, np.flatnonzero over a sheared matrix and its columns) in module-level helpers, so the local path has no per-element Python loop.",
+			"summary": "In forgestream/emotion/crqa_router.py, add module-level _standardize, _recurrence_matrix (broadcast as in dynamics.py), _run_lengths(bool_2d) (pads each row with False, diffs, and pairs start/end indices), and _local_crqa, which shears the matrix so diagonals become rows and returns det/lam/rr plus tt (mean vertical line >=2) and entr (diagonal-length entropy), in the same layout as transfer_entropy.py. CRQAComputeRouter holds only the endpoint, timeout and the three breaker attributes: the short-input zero result comes first, the empty endpoint or an open circuit with skips left (each call uses up one of 5) goes local, and the httpx POST with n_surrogates=20 has significance-gated det/tt and surrogate_validated=True; any exception or bad response logs a warning, counts towards the 3-failure open, and returns _local_crqa, while a success resets the breaker. Add httpx to the emotion and dev extras; tests check that identical signals give higher local DET than shuffled ones, plus every breaker transition with a patched AsyncClient.post.",
+			"files": [
+				"forgestream/emotion/crqa_router.py",
+				"tests/emotion/test_crqa_router.py",
+				"pyproject.toml"
+			]
+		},
+		{
+			"title": "scipy.ndimage segment labelling",
+			"stance": "Find diagonal and vertical recurrence lines by labelling connected segments with scipy.ndimage.label using np.eye(3) and vertical 3x1 structuring elements, then use np.bincount for line lengths, reusing the scipy that dynamics.py already imports.",
+			"summary": "forgestream/emotion/crqa_router.py builds the z-scored broadcast recurrence matrix, labels diagonal and vertical segments with scipy.ndimage.label, gets line lengths via np.bincount(labels.ravel())[1:], and derives det, lam, tt and entr from lengths >=2 and rr from the matrix mean. The router implements the issue's routing exactly: zero result under 10 samples, local-only with an empty endpoint, an httpx POST to /crqa/validate with n_surrogates=20 and significance-gated det/tt, a warning plus local fallback on any error or timeout, the circuit opening at 3 consecutive failures for 5 skipped calls, then a retry, with success resetting _consecutive_failures/_circuit_open/_skip_remaining. Declare scipy (currently imported but undeclared) and httpx in the emotion extra and httpx in dev; tests cover local metric ranges and breaker transitions with patched httpx.",
+			"files": [
+				"forgestream/emotion/crqa_router.py",
+				"tests/emotion/test_crqa_router.py",
+				"pyproject.toml"
+			]
+		},
+		{
+			"title": "Library-backed embedded CRQA off-thread",
+			"stance": "Delegate the local computation to pyunicorn's CrossRecurrencePlot on the z-scored series with the caller's embedding_dim, time_delay and radius, run through asyncio.to_thread, so the fallback uses the same method and parameters as the RunPod endpoint and doesn't block the event loop.",
+			"summary": "forgestream/emotion/crqa_router.py wraps pyunicorn CrossRecurrencePlot(determinism, laminarity, recurrence_rate, trapping_time, diag_entropy with l_min=2) in a sync _local_crqa that compute() awaits via asyncio.to_thread, matching how extractor.py moves CPU work off the loop. The router returns the all-zero result for series under 10 samples before any remote or breaker work, POSTs to {endpoint}/crqa/validate with n_surrogates=20 via httpx, gates det/tt on the significance flags with surrogate_validated=True, logs a warning and falls back on any exception, and runs the 3-failure/5-skip/retry/success-reset breaker on _consecutive_failures, _circuit_open and _skip_remaining. Add pyunicorn and httpx to the emotion extra and httpx to dev; tests cover breaker transitions with patched httpx and in-range local results for identical vs random signals.",
+			"files": [
+				"forgestream/emotion/crqa_router.py",
+				"tests/emotion/test_crqa_router.py",
+				"pyproject.toml"
+			]
+		}
+	],
+	"jev": {
+		"differ": {
+			"differ_0_1": 0.97,
+			"differ_0_2": 0.98,
+			"differ_0_3": 0.98,
+			"differ_1_2": 0.97,
+			"differ_1_3": 0.98,
+			"differ_2_3": 0.98
+		},
+		"complete": [
+			0.84,
+			0.8,
+			0.79,
+			0.61
+		],
+		"axis": "error_handling",
+		"axisConfidence": 0.6799999999999999,
+		"axisProbabilities": {
+			"algorithm": 0.01,
+			"concurrency": 0.015,
+			"data_model": 0,
+			"reuse": 0.01,
+			"location": 0,
+			"api_surface": 0.23,
+			"error_handling": 0.72,
+			"other": 0.01
+		}
+	},
+	"regenerated": true,
+	"problems": [],
+	"cost": 0.8022685999999999,
+	"model": "anthropic/claude-opus-5-5"
+}

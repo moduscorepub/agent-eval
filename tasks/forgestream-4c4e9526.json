@@ -1,0 +1,22 @@
+{
+	"id": "forgestream-4c4e9526",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "4c4e9526ba0de55ce2d9a77a7c0e5c3c30fe5cce",
+	"parent": "ac0e31786a3c44eebe72de6a128e8673e18024f2",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/emotion/test_rapport_dashboard.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_rapport_dashboard.py"
+	],
+	"ref": {
+		"srcAdded": 12,
+		"srcRemoved": 0,
+		"files": 1
+	},
+	"message": "feat(dashboard): add /emotion/rapport API endpoint",
+	"statement": "Dashboard API: add GET /emotion/rapport endpoint for rapport scores\n\nThe dashboard API has no way to retrieve rapport data. `rapport_score` events are written to the event log, but nothing exposes them to the dashboard for visualization. Add a `GET /emotion/rapport` route to the router returned by `create_router(firestore_db)`, as an async handler that takes no arguments.\n\nThe response is a JSON object with two keys:\n- `scores`: the payloads of all `rapport_score` events, in event order. Each payload is passed through unchanged. This includes `timestamp_ms`, `group_composite`, `group_trend`, `pair_scores`, and `disengaged_speakers`. Events of other types are excluded.\n- `latest_trend`: the `group_trend` from the most recent `rapport_score` payload. It is `0.0` when there are no rapport events, or when the latest payload has no `group_trend`.\n\nExample: with one `rapport_score` event whose payload has `group_composite: 0.72` and `group_trend: 0.05`, the response is `{\"scores\": [<that payload>], \"latest_trend\": 0.05}`. With no rapport events, the response is `{\"scores\": [], \"latest_trend\": 0.0}`."
+}

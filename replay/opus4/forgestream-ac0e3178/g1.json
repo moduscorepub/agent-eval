@@ -1,0 +1,11 @@
+{
+	"group": [
+		"off-s1",
+		"off-s2",
+		"off-s3",
+		"off-s4"
+	],
+	"order1": "off-s4",
+	"order2": "off-s4",
+	"cost": 0.3978664
+}

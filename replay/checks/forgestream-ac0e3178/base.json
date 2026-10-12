@@ -1,0 +1,30 @@
+{
+	"suite": {
+		"ran": true,
+		"timedOut": false,
+		"exitCode": 1,
+		"total": 336,
+		"failed": [
+			"tests.audio.test_microphone.TestMicrophoneSource::test_list_devices",
+			"tests.audio.test_microphone.TestMicrophoneSource::test_start_opens_stream",
+			"tests.audio.test_microphone.TestMicrophoneSource::test_stop_closes_stream",
+			"tests.audio.test_microphone.TestSystemAudioSource::test_find_blackhole",
+			"tests.audio.test_microphone.TestSystemAudioSource::test_is_available",
+			"tests.audio.test_source.TestAudioSource::test_cannot_iterate_base_class",
+			"tests.events.test_store.TestEventStore::test_append_and_retrieve",
+			"tests.events.test_store.TestEventStore::test_append_multiple_events",
+			"tests.events.test_store.TestEventStore::test_filter_by_event_type",
+			"tests.events.test_store.TestEventStore::test_filter_by_branch",
+			"tests.events.test_store.TestEventStore::test_get_latest_evaluator",
+			"tests.events.test_store.TestEventStore::test_count_by_type",
+			"tests.events.test_subscribe.TestEventSubscriber::test_subscribe_receives_events",
+			"tests.events.test_subscribe.TestEventSubscriber::test_store_append_triggers_subscriber",
+			"tests.test_milestone_a.TestMilestoneAIntegration::test_full_pipeline_with_persistence",
+			"tests.test_orchestrator.TestOrchestratorPersistence::test_process_event_writes_to_store"
+		],
+		"ms": 7991
+	},
+	"suiteWritten": [
+		"docs/meetings/2026-10-12-test.md"
+	]
+}

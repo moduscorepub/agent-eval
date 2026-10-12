@@ -1,0 +1,268 @@
+{
+	"ponytail": [
+		{
+			"task": "forgestream-55dd23a4",
+			"delta": -0.5833333333333333,
+			"condRun": "forgestream-55dd23a4/ponytail-s3",
+			"baseRun": "forgestream-55dd23a4/off-s5"
+		},
+		{
+			"task": "retrieval-harness-1ad941fa",
+			"delta": -0.5,
+			"condRun": "retrieval-harness-1ad941fa/ponytail-s3",
+			"baseRun": "retrieval-harness-1ad941fa/off-s5"
+		},
+		{
+			"task": "open-seo-8a728563",
+			"delta": -0.2499999999999999,
+			"condRun": "open-seo-8a728563/ponytail-s2",
+			"baseRun": "open-seo-8a728563/off-s1"
+		},
+		{
+			"task": "forgestream-ac0e3178",
+			"delta": -0.16666666666666674,
+			"condRun": "forgestream-ac0e3178/ponytail-s2",
+			"baseRun": "forgestream-ac0e3178/off-s1"
+		},
+		{
+			"task": "forgestream-8699f287",
+			"delta": 3.3333333333333335,
+			"condRun": "forgestream-8699f287/ponytail-s2",
+			"baseRun": "forgestream-8699f287/off-s2"
+		},
+		{
+			"task": "forgestream-efd54879",
+			"delta": 1.416666666666667,
+			"condRun": "forgestream-efd54879/ponytail-s3",
+			"baseRun": "forgestream-efd54879/off-s3"
+		}
+	],
+	"grain": [
+		{
+			"task": "retrieval-harness-255ebb18",
+			"delta": -0.5833333333333339,
+			"condRun": "retrieval-harness-255ebb18/grain-s2",
+			"baseRun": "retrieval-harness-255ebb18/off-s5"
+		},
+		{
+			"task": "retrieval-harness-259c0bc0",
+			"delta": -0.5833333333333335,
+			"condRun": "retrieval-harness-259c0bc0/grain-s3",
+			"baseRun": "retrieval-harness-259c0bc0/off-s4"
+		},
+		{
+			"task": "retrieval-harness-4803c24f",
+			"delta": -0.5833333333333335,
+			"condRun": "retrieval-harness-4803c24f/grain-s1",
+			"baseRun": "retrieval-harness-4803c24f/off-s6"
+		},
+		{
+			"task": "retrieval-harness-edd95af0",
+			"delta": -0.5833333333333333,
+			"condRun": "retrieval-harness-edd95af0/grain-s2",
+			"baseRun": "retrieval-harness-edd95af0/off-s4"
+		},
+		{
+			"task": "open-seo-b0b5528a",
+			"delta": 1.5,
+			"condRun": "open-seo-b0b5528a/grain-s2",
+			"baseRun": "open-seo-b0b5528a/off-s3"
+		},
+		{
+			"task": "retrieval-harness-894da0d0",
+			"delta": 1.4166666666666665,
+			"condRun": "retrieval-harness-894da0d0/grain-s2",
+			"baseRun": "retrieval-harness-894da0d0/off-s2"
+		}
+	],
+	"gate": [
+		{
+			"task": "retrieval-harness-1ad941fa",
+			"delta": -0.8333333333333333,
+			"condRun": "retrieval-harness-1ad941fa/gate-s1",
+			"baseRun": "retrieval-harness-1ad941fa/off-s5"
+		},
+		{
+			"task": "retrieval-harness-255ebb18",
+			"delta": -0.75,
+			"condRun": "retrieval-harness-255ebb18/gate-s1",
+			"baseRun": "retrieval-harness-255ebb18/off-s5"
+		},
+		{
+			"task": "retrieval-harness-894da0d0",
+			"delta": -0.75,
+			"condRun": "retrieval-harness-894da0d0/gate-s1",
+			"baseRun": "retrieval-harness-894da0d0/off-s2"
+		},
+		{
+			"task": "retrieval-harness-edd95af0",
+			"delta": -0.5833333333333333,
+			"condRun": "retrieval-harness-edd95af0/gate-s3",
+			"baseRun": "retrieval-harness-edd95af0/off-s4"
+		},
+		{
+			"task": "forgestream-c8b5bfe7",
+			"delta": 2.416666666666667,
+			"condRun": "forgestream-c8b5bfe7/gate-s1",
+			"baseRun": "forgestream-c8b5bfe7/off-s4"
+		},
+		{
+			"task": "retrieval-harness-4803c24f",
+			"delta": 1.9166666666666665,
+			"condRun": "retrieval-harness-4803c24f/gate-s1",
+			"baseRun": "retrieval-harness-4803c24f/off-s6"
+		}
+	],
+	"checkers": [
+		{
+			"task": "retrieval-harness-1ad941fa",
+			"delta": -0.8333333333333333,
+			"condRun": "retrieval-harness-1ad941fa/checkers-s2",
+			"baseRun": "retrieval-harness-1ad941fa/off-s5"
+		},
+		{
+			"task": "retrieval-harness-edd95af0",
+			"delta": -0.41666666666666663,
+			"condRun": "retrieval-harness-edd95af0/checkers-s3",
+			"baseRun": "retrieval-harness-edd95af0/off-s4"
+		},
+		{
+			"task": "retrieval-harness-255ebb18",
+			"delta": -0.25,
+			"condRun": "retrieval-harness-255ebb18/checkers-s2",
+			"baseRun": "retrieval-harness-255ebb18/off-s5"
+		},
+		{
+			"task": "retrieval-harness-013bb5c6",
+			"delta": -0.16666666666666666,
+			"condRun": "retrieval-harness-013bb5c6/checkers-s2",
+			"baseRun": "retrieval-harness-013bb5c6/off-s3"
+		},
+		{
+			"task": "forgestream-8699f287",
+			"delta": 2.4999999999999996,
+			"condRun": "forgestream-8699f287/checkers-s3",
+			"baseRun": "forgestream-8699f287/off-s2"
+		},
+		{
+			"task": "open-seo-b0b5528a",
+			"delta": 2.1666666666666665,
+			"condRun": "open-seo-b0b5528a/checkers-s2",
+			"baseRun": "open-seo-b0b5528a/off-s3"
+		}
+	],
+	"approach": [
+		{
+			"task": "forgestream-c8b5bfe7",
+			"delta": -2.083333333333333,
+			"condRun": "forgestream-c8b5bfe7/approach-s2",
+			"baseRun": "forgestream-c8b5bfe7/off-s4"
+		},
+		{
+			"task": "forgestream-d49ca481",
+			"delta": -1.8333333333333335,
+			"condRun": "forgestream-d49ca481/approach-s3",
+			"baseRun": "forgestream-d49ca481/off-s2"
+		},
+		{
+			"task": "retrieval-harness-1ad941fa",
+			"delta": -1.3333333333333335,
+			"condRun": "retrieval-harness-1ad941fa/approach-s2",
+			"baseRun": "retrieval-harness-1ad941fa/off-s5"
+		},
+		{
+			"task": "retrieval-harness-255ebb18",
+			"delta": -0.5833333333333339,
+			"condRun": "retrieval-harness-255ebb18/approach-s2",
+			"baseRun": "retrieval-harness-255ebb18/off-s5"
+		},
+		{
+			"task": "forgestream-ac0e3178",
+			"delta": 1.1666666666666665,
+			"condRun": "forgestream-ac0e3178/approach-s2",
+			"baseRun": "forgestream-ac0e3178/off-s1"
+		},
+		{
+			"task": "retrieval-harness-894da0d0",
+			"delta": 1.0833333333333335,
+			"condRun": "retrieval-harness-894da0d0/approach-s2",
+			"baseRun": "retrieval-harness-894da0d0/off-s2"
+		}
+	],
+	"history": [
+		{
+			"task": "retrieval-harness-259c0bc0",
+			"delta": -2.25,
+			"condRun": "retrieval-harness-259c0bc0/history-s1",
+			"baseRun": "retrieval-harness-259c0bc0/off-s4"
+		},
+		{
+			"task": "retrieval-harness-255ebb18",
+			"delta": -0.916666666666667,
+			"condRun": "retrieval-harness-255ebb18/history-s1",
+			"baseRun": "retrieval-harness-255ebb18/off-s5"
+		},
+		{
+			"task": "retrieval-harness-1ad941fa",
+			"delta": -0.8333333333333333,
+			"condRun": "retrieval-harness-1ad941fa/history-s1",
+			"baseRun": "retrieval-harness-1ad941fa/off-s5"
+		},
+		{
+			"task": "retrieval-harness-edd95af0",
+			"delta": -0.5833333333333333,
+			"condRun": "retrieval-harness-edd95af0/history-s1",
+			"baseRun": "retrieval-harness-edd95af0/off-s4"
+		},
+		{
+			"task": "forgestream-d49ca481",
+			"delta": 1.333333333333333,
+			"condRun": "forgestream-d49ca481/history-s3",
+			"baseRun": "forgestream-d49ca481/off-s2"
+		},
+		{
+			"task": "retrieval-harness-894da0d0",
+			"delta": 0.916666666666667,
+			"condRun": "retrieval-harness-894da0d0/history-s1",
+			"baseRun": "retrieval-harness-894da0d0/off-s2"
+		}
+	],
+	"bestof2": [
+		{
+			"task": "forgestream-efd54879",
+			"delta": -0.75,
+			"condRun": "forgestream-efd54879/bestof2-s2",
+			"baseRun": "forgestream-efd54879/off-s3"
+		},
+		{
+			"task": "retrieval-harness-1ad941fa",
+			"delta": -0.6666666666666667,
+			"condRun": "retrieval-harness-1ad941fa/bestof2-s2",
+			"baseRun": "retrieval-harness-1ad941fa/off-s5"
+		},
+		{
+			"task": "retrieval-harness-259c0bc0",
+			"delta": -0.5833333333333335,
+			"condRun": "retrieval-harness-259c0bc0/bestof2-s2",
+			"baseRun": "retrieval-harness-259c0bc0/off-s4"
+		},
+		{
+			"task": "forgestream-55dd23a4",
+			"delta": -0.5833333333333333,
+			"condRun": "forgestream-55dd23a4/bestof2-s2",
+			"baseRun": "forgestream-55dd23a4/off-s5"
+		},
+		{
+			"task": "forgestream-8699f287",
+			"delta": 0.33333333333333304,
+			"condRun": "forgestream-8699f287/bestof2-s2",
+			"baseRun": "forgestream-8699f287/off-s2"
+		},
+		{
+			"task": "retrieval-harness-edd95af0",
+			"delta": 0.2500000000000001,
+			"condRun": "retrieval-harness-edd95af0/bestof2-s3",
+			"baseRun": "retrieval-harness-edd95af0/off-s4"
+		}
+	]
+}

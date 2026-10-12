@@ -1,0 +1,56 @@
+{
+	"run": "off-s2",
+	"applied": true,
+	"files": [
+		{
+			"path": "docs/meetings/2026-10-11-test.md",
+			"status": "A",
+			"kind": "other"
+		},
+		{
+			"path": "forgestream/governor/trust_region.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/live_stream.py",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 353,
+		"failed": 16,
+		"regressions": [],
+		"ownTotal": 0,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 1,
+		"findings": [
+			{
+				"file": "forgestream/live_stream.py",
+				"line": 193,
+				"tool": "pyright",
+				"code": "reportMissingTypeArgument",
+				"message": "Expected type arguments for generic class \"dict\""
+			}
+		]
+	},
+	"stray": {
+		"files": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"suiteWritten": [
+			"docs/meetings/2026-10-11-test.md"
+		],
+		"shaped": [
+			"docs/meetings/2026-10-11-test.md"
+		]
+	},
+	"testFiles": [],
+	"runnableTests": [],
+	"strippedHiddenPass": true
+}

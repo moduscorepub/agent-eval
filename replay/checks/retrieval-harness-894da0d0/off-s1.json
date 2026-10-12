@@ -1,0 +1,70 @@
+{
+	"run": "off-s1",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/harness/graph_exec.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/serve.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/showroom.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/test_showroom_api.py",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "web/src/components/WorkingPanel.tsx",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 74,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 11,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 2,
+		"findings": [
+			{
+				"file": "src/harness/serve.py",
+				"line": 9,
+				"tool": "ruff",
+				"code": "I001",
+				"message": "Import block is un-sorted or un-formatted"
+			},
+			{
+				"file": "src/harness/showroom.py",
+				"line": 8,
+				"tool": "ruff",
+				"code": "I001",
+				"message": "Import block is un-sorted or un-formatted"
+			}
+		]
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/test_showroom_api.py"
+	],
+	"runnableTests": [
+		"tests/test_showroom_api.py"
+	]
+}

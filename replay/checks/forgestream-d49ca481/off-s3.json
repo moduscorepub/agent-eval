@@ -1,0 +1,75 @@
+{
+	"run": "off-s3",
+	"applied": true,
+	"files": [
+		{
+			"path": "forgestream/config.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/classifier.py",
+			"status": "A",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/extractor.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/emotion/features.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "forgestream/live_stream.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/emotion/test_classifier.py",
+			"status": "A",
+			"kind": "test"
+		}
+	],
+	"suite": {
+		"total": 539,
+		"failed": 32,
+		"regressions": [],
+		"ownTotal": 20,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 1
+	},
+	"checker": {
+		"count": 2,
+		"findings": [
+			{
+				"file": "forgestream/emotion/classifier.py",
+				"line": 70,
+				"tool": "pyright",
+				"code": "reportOptionalMemberAccess",
+				"message": "\"generate\" is not a known attribute of \"None\""
+			},
+			{
+				"file": "forgestream/emotion/extractor.py",
+				"line": 57,
+				"tool": "pyright",
+				"code": "reportUndefinedVariable",
+				"message": "\"SenseVoiceClassifier\" is not defined"
+			}
+		]
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/emotion/test_classifier.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_classifier.py"
+	]
+}

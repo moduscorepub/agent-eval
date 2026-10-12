@@ -1,0 +1,611 @@
+{
+	"criterion": "k * Var(condition means) > mean within-condition variance of merge cost",
+	"source": "runs/main",
+	"conditions": "all with >=2 runs",
+	"dev": [
+		"forgestream-55dd23a4",
+		"forgestream-900fcbb0",
+		"forgestream-ac0e3178",
+		"forgestream-c8b5bfe7",
+		"forgestream-d49ca481",
+		"open-seo-14532413",
+		"open-seo-8a728563",
+		"open-seo-acd28749",
+		"open-seo-b0b5528a",
+		"open-seo-d3c62aa5",
+		"open-seo-eec998a7",
+		"retrieval-harness-1ad941fa",
+		"retrieval-harness-259c0bc0",
+		"retrieval-harness-4803c24f",
+		"retrieval-harness-894da0d0",
+		"retrieval-harness-edd95af0"
+	],
+	"holdout": [
+		"forgestream-4c4e9526",
+		"forgestream-508a89dc",
+		"forgestream-8699f287",
+		"forgestream-ae149ba0",
+		"forgestream-efd54879",
+		"open-seo-2c153f9a",
+		"open-seo-3edbd0c1",
+		"open-seo-c40a0445",
+		"open-seo-c81fd7a1",
+		"retrieval-harness-013bb5c6",
+		"retrieval-harness-255ebb18",
+		"retrieval-harness-4e0304df",
+		"retrieval-harness-dcb986d2",
+		"retrieval-harness-ffcc10be"
+	],
+	"perTask": {
+		"retrieval-harness-255ebb18": {
+			"ratio": 0.3137254901960785,
+			"between": 1.3333333333333335,
+			"within": 8.5,
+			"scores": {
+				"grain-v1": [
+					5,
+					6
+				],
+				"ponytail": [
+					6,
+					1
+				],
+				"off": [
+					1,
+					6
+				]
+			}
+		},
+		"open-seo-14532413": {
+			"ratio": 1.0000000000000002,
+			"between": 0.33333333333333337,
+			"within": 0.6666666666666666,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					2
+				]
+			}
+		},
+		"forgestream-508a89dc": {
+			"ratio": 0,
+			"between": 0,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		},
+		"open-seo-8a728563": {
+			"ratio": null,
+			"between": 0.33333333333333337,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					1,
+					1
+				],
+				"off": [
+					1,
+					1
+				]
+			}
+		},
+		"forgestream-4c4e9526": {
+			"ratio": 0,
+			"between": 0,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		},
+		"open-seo-3edbd0c1": {
+			"ratio": 0,
+			"between": 0,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		},
+		"retrieval-harness-013bb5c6": {
+			"ratio": 0.5000000000000001,
+			"between": 0.08333333333333334,
+			"within": 0.3333333333333333,
+			"scores": {
+				"grain-v1": [
+					1,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					1
+				]
+			}
+		},
+		"retrieval-harness-259c0bc0": {
+			"ratio": 7.578947368421053,
+			"between": 12,
+			"within": 3.1666666666666665,
+			"scores": {
+				"grain-v1": [
+					5,
+					8
+				],
+				"ponytail": [
+					8,
+					5
+				],
+				"off": [
+					1,
+					0
+				]
+			}
+		},
+		"open-seo-2c153f9a": {
+			"ratio": 0,
+			"between": 0,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		},
+		"retrieval-harness-1ad941fa": {
+			"ratio": 1.0000000000000002,
+			"between": 0.08333333333333334,
+			"within": 0.16666666666666666,
+			"scores": {
+				"grain-v1": [
+					1,
+					2
+				],
+				"ponytail": [
+					2,
+					2
+				],
+				"off": [
+					2,
+					2
+				]
+			}
+		},
+		"open-seo-c81fd7a1": {
+			"ratio": 0,
+			"between": 0,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		},
+		"retrieval-harness-ffcc10be": {
+			"ratio": 0,
+			"between": 0,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		},
+		"retrieval-harness-dcb986d2": {
+			"ratio": 0.5,
+			"between": 0.08333333333333333,
+			"within": 0.3333333333333333,
+			"scores": {
+				"grain-v1": [
+					1,
+					0
+				],
+				"ponytail": [
+					1,
+					0
+				],
+				"off": [
+					1,
+					1
+				]
+			}
+		},
+		"forgestream-d49ca481": {
+			"ratio": 3.8,
+			"between": 1.5833333333333333,
+			"within": 0.8333333333333334,
+			"scores": {
+				"grain-v1": [
+					2,
+					2
+				],
+				"ponytail": [
+					4,
+					2
+				],
+				"off": [
+					4,
+					5
+				]
+			}
+		},
+		"open-seo-b0b5528a": {
+			"ratio": 6.199999999999999,
+			"between": 2.583333333333333,
+			"within": 0.8333333333333334,
+			"scores": {
+				"grain-v1": [
+					1,
+					2
+				],
+				"ponytail": [
+					1,
+					1
+				],
+				"off": [
+					5,
+					3
+				]
+			}
+		},
+		"retrieval-harness-edd95af0": {
+			"ratio": 3.4999999999999996,
+			"between": 0.5833333333333333,
+			"within": 0.3333333333333333,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					2,
+					1
+				],
+				"off": [
+					1,
+					0
+				]
+			}
+		},
+		"retrieval-harness-894da0d0": {
+			"ratio": 1.8846153846153846,
+			"between": 4.083333333333333,
+			"within": 4.333333333333333,
+			"scores": {
+				"grain-v1": [
+					3,
+					3
+				],
+				"ponytail": [
+					4,
+					9
+				],
+				"off": [
+					6,
+					7
+				]
+			}
+		},
+		"open-seo-d3c62aa5": {
+			"ratio": 1.0000000000000002,
+			"between": 0.08333333333333334,
+			"within": 0.16666666666666666,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					1,
+					0
+				]
+			}
+		},
+		"retrieval-harness-4e0304df": {
+			"ratio": 0.5000000000000001,
+			"between": 0.08333333333333334,
+			"within": 0.3333333333333333,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					1,
+					0
+				],
+				"off": [
+					0,
+					1
+				]
+			}
+		},
+		"forgestream-c8b5bfe7": {
+			"ratio": 1.4545454545454546,
+			"between": 1.3333333333333333,
+			"within": 1.8333333333333333,
+			"scores": {
+				"grain-v1": [
+					2,
+					5
+				],
+				"ponytail": [
+					2,
+					1
+				],
+				"off": [
+					4,
+					3
+				]
+			}
+		},
+		"open-seo-acd28749": {
+			"ratio": 1.5,
+			"between": 1,
+			"within": 1.3333333333333333,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					2
+				],
+				"off": [
+					3,
+					1
+				]
+			}
+		},
+		"forgestream-ac0e3178": {
+			"ratio": 6.999999999999999,
+			"between": 0.5833333333333333,
+			"within": 0.16666666666666666,
+			"scores": {
+				"grain-v1": [
+					2,
+					1
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					1,
+					1
+				]
+			}
+		},
+		"forgestream-8699f287": {
+			"ratio": 0.03448275862068966,
+			"between": 0.08333333333333334,
+			"within": 4.833333333333333,
+			"scores": {
+				"grain-v1": [
+					2,
+					5
+				],
+				"ponytail": [
+					2,
+					6
+				],
+				"off": [
+					3,
+					5
+				]
+			}
+		},
+		"forgestream-efd54879": {
+			"ratio": 0.3333333333333333,
+			"between": 1,
+			"within": 6,
+			"scores": {
+				"grain-v1": [
+					6,
+					10
+				],
+				"ponytail": [
+					7,
+					11
+				],
+				"off": [
+					6,
+					8
+				]
+			}
+		},
+		"open-seo-c40a0445": {
+			"ratio": 0,
+			"between": 0,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		},
+		"forgestream-900fcbb0": {
+			"ratio": 3.5000000000000004,
+			"between": 0.5833333333333334,
+			"within": 0.3333333333333333,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					1,
+					0
+				],
+				"off": [
+					2,
+					1
+				]
+			}
+		},
+		"retrieval-harness-4803c24f": {
+			"ratio": 1.0370370370370372,
+			"between": 2.3333333333333335,
+			"within": 4.5,
+			"scores": {
+				"grain-v1": [
+					1,
+					2
+				],
+				"ponytail": [
+					2,
+					7
+				],
+				"off": [
+					3,
+					2
+				]
+			}
+		},
+		"forgestream-ae149ba0": {
+			"ratio": 0,
+			"between": 0,
+			"within": 0,
+			"scores": {
+				"grain-v1": [
+					0,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		},
+		"forgestream-55dd23a4": {
+			"ratio": 1.5,
+			"between": 0.75,
+			"within": 1,
+			"scores": {
+				"grain-v1": [
+					1,
+					2
+				],
+				"ponytail": [
+					2,
+					4
+				],
+				"off": [
+					2,
+					1
+				]
+			}
+		},
+		"open-seo-eec998a7": {
+			"ratio": 1.0000000000000002,
+			"between": 0.33333333333333337,
+			"within": 0.6666666666666666,
+			"scores": {
+				"grain-v1": [
+					2,
+					0
+				],
+				"ponytail": [
+					0,
+					0
+				],
+				"off": [
+					0,
+					0
+				]
+			}
+		}
+	}
+}

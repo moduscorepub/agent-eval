@@ -1,0 +1,53 @@
+{
+	"run": "off-s3",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/harness/showroom.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/test_showroom_api.py",
+			"status": "M",
+			"kind": "test"
+		},
+		{
+			"path": "web/src/components/WorkingPanel.tsx",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 76,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 13,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 1,
+		"findings": [
+			{
+				"file": "src/harness/showroom.py",
+				"line": 166,
+				"tool": "mypy",
+				"code": "arg-type",
+				"message": "Argument 4 to \"run_in_threadpool\" has incompatible type \"SearchRequest\"; expected \"AnswerRequest\""
+			}
+		]
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/test_showroom_api.py"
+	],
+	"runnableTests": [
+		"tests/test_showroom_api.py"
+	]
+}

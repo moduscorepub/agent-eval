@@ -1,0 +1,22 @@
+{
+	"id": "retrieval-harness-255ebb18",
+	"repo": "retrieval-harness",
+	"repoPath": "/Users/mergimg0/projects/retrieval-harness",
+	"sha": "255ebb18db4c08ffeb7a340b79463404ebccfe30",
+	"parent": "e4e4e313df85fa126ba7b62e9faef440403c9029",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/test_gates.py"
+	],
+	"runnableTests": [
+		"tests/test_gates.py"
+	],
+	"ref": {
+		"srcAdded": 58,
+		"srcRemoved": 8,
+		"files": 3
+	},
+	"message": "The gate becomes boring and total: every guard enforced on the champion, objective judged on the retrieval route",
+	"statement": "Champion gate doesn't enforce all guards; objective recall is judged on the wrong slice\n\nThe tuner decides `target_met` with only `holdout recall@k >= target and leakage == 0`. The other guards (`temporal_leakage`, `refusal_integrity`, `priv_block_integrity`) show up in the ledger but are never enforced. A champion that leaks across time, fails refusals, or lets privileged content through can still report \"TARGET MET\". In grid mode, screening prunes only on `leakage`, so configs with `refusal_integrity < 1.0` also survive to confirmation. Smart mode already prunes on refusal integrity.\n\nRecall is also computed over all pack rows. Graph-shaped and conversational rows drag down or inflate the text retriever's score. When the pack has a `route:retrieval` slice, that slice's recall should be the objective for screening scores, for ranking dev results to pick the champion, and for the final target comparison. Without that slice, overall `recall_at_k` stays the objective.\n\nAdd `harness.gates.objective_recall(res: dict) -> float`. It returns the recall from `res[\"slices\"][\"route:retrieval\"][0]` when that slice exists, otherwise `res[\"recall_at_k\"]`.\n\nAdd `harness.gates.champion_gate(res: dict, target: float) -> tuple[bool, list[str]]`. It passes only if all of these hold:\n- `leakage == 0`\n- `temporal_leakage == 0`\n- `refusal_integrity == 1.0`\n- `priv_block_integrity == 1.0`\n- `objective_recall(res) >= target`\n\nIt returns `(passed, reasons)`. `reasons` has one human-readable entry for every failed condition, not just the first, and is empty when the gate passes. Missing guard keys are treated as passing.\n\nBoth `tune` and `tune_smart` should compute `target_met` from `champion_gate` on the holdout result and include the reasons in the outcome as `gate_reasons`. The report verdict should list those reasons, for example `WALL: leakage 2 (must be 0); recall 0.880 < target 0.9`. It should fall back to \"target not met\" when no reasons are present."
+}

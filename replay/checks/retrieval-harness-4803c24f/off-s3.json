@@ -1,0 +1,79 @@
+{
+	"run": "off-s3",
+	"applied": true,
+	"files": [
+		{
+			"path": "src/harness/calibrate.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "src/harness/serve.py",
+			"status": "M",
+			"kind": "src"
+		},
+		{
+			"path": "tests/test_calibrate.py",
+			"status": "A",
+			"kind": "test"
+		},
+		{
+			"path": "web/src/components/WorkingPanel.tsx",
+			"status": "M",
+			"kind": "src"
+		}
+	],
+	"suite": {
+		"total": 69,
+		"failed": 0,
+		"regressions": [],
+		"ownTotal": 4,
+		"ownFailed": 0,
+		"timedOut": false,
+		"exitCode": 0
+	},
+	"checker": {
+		"count": 4,
+		"findings": [
+			{
+				"file": "src/harness/calibrate.py",
+				"line": 115,
+				"tool": "mypy",
+				"code": "var-annotated",
+				"message": "Need type annotation for \"train\" (hint: \"train: list[<type>] = ...\")"
+			},
+			{
+				"file": "src/harness/calibrate.py",
+				"line": 115,
+				"tool": "mypy",
+				"code": "var-annotated",
+				"message": "Need type annotation for \"cal\" (hint: \"cal: list[<type>] = ...\")"
+			},
+			{
+				"file": "src/harness/serve.py",
+				"line": 94,
+				"tool": "mypy",
+				"code": "arg-type",
+				"message": "Argument 1 to \"predict\" has incompatible type \"dict[Any, Any] | None\"; expected \"dict[Any, Any]\""
+			},
+			{
+				"file": "src/harness/serve.py",
+				"line": 95,
+				"tool": "mypy",
+				"code": "union-attr",
+				"message": "Item \"None\" of \"dict[Any, Any] | None\" has no attribute \"get\""
+			}
+		]
+	},
+	"stray": {
+		"files": [],
+		"suiteWritten": [],
+		"shaped": []
+	},
+	"testFiles": [
+		"tests/test_calibrate.py"
+	],
+	"runnableTests": [
+		"tests/test_calibrate.py"
+	]
+}

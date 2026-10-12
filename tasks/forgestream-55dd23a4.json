@@ -1,0 +1,24 @@
+{
+	"id": "forgestream-55dd23a4",
+	"repo": "forgestream",
+	"repoPath": "/Users/mergimg0/projects/forgestream",
+	"sha": "55dd23a4b6454711ae909fcc79e0fac5f2c4e92f",
+	"parent": "85e524476c345f3d21594613b4d827e15f9ec62d",
+	"setup": "uv sync --frozen --all-extras --quiet || uv sync --all-extras --quiet",
+	"test": "uv run --no-sync python -m pytest -q -p no:cacheprovider {files}",
+	"testFiles": [
+		"tests/emotion/test_grpo_loop.py",
+		"tests/emotion/test_trust_persistence.py"
+	],
+	"runnableTests": [
+		"tests/emotion/test_grpo_loop.py",
+		"tests/emotion/test_trust_persistence.py"
+	],
+	"ref": {
+		"srcAdded": 67,
+		"srcRemoved": 2,
+		"files": 2
+	},
+	"message": "feat: GRPO end-to-end loop (Theme 1) + trust region persistence (Theme 2)",
+	"statement": "Persist trust region state and close the GRPO loop in GeminiLiveStream\n\nTwo parts of the self-improvement loop don't carry over between meetings.\n\n**1. GeminiLiveStream doesn't use persisted learning state.**\n- At construction it should load the evaluator weights saved by earlier meetings from `config.data_dir`. With no saved file, the evaluator should keep its defaults, for example engagement = 0.15, and the meeting count should be 1.\n- With a saved `weights.json` that has custom weights and `meeting_count: 5`, `orchestrator.evaluator.weights` should reflect those values. `stream._meeting_count` should be 5.\n- The loaded meeting count should also be passed as `meeting_count` when the rapport engine is attached.\n- The signature should change to `async def stop(self, run_post_meeting: bool = True) -> dict | None`.\n  - With the default, `stop()` should shut down as it does now, then run post-meeting synthesis over the orchestrator's buffered events. It should use `config.meeting_name`, or \"unnamed\" if unset, and the stream's audio buffer.\n  - It should return the synthesis result dict, which includes `weights`, `meeting_count`, `rapport_weights` and `e_meso`.\n  - With `run_post_meeting=False`, it should skip synthesis and return `None`.\n\n**2. TrustRegion state is lost between sessions.**\n- Add `TrustRegion.save(path: str | Path) -> None`. It should write `consecutive_improvements`, `total_violations`, `meeting_count`, `volatility` and `epsilon` to JSON, and create missing parent directories.\n- Add `TrustRegion.load(path: str | Path) -> TrustRegion` as a classmethod. After a save and load round trip, the counters and `epsilon` should match the original. If the file doesn't exist, it should return a default `TrustRegion()` without raising. Missing keys in an existing file should fall back to defaults."
+}
